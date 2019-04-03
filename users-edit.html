@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -442,47 +442,86 @@
                         <div class="breadcrumb-item">编辑</div>
                     </div>
                 </div>
-
                 <div class="section-body">
-                    <h2 class="section-title">权限分配</h2>
-                    <p class="section-lead">为用户分配相应的角色,通过该用户提供的部门名称来调整其所属部门</p>
+                    <h2 class="section-title">Hi, Ujang!</h2>
+                    <p class="section-lead">
+                        Change information about yourself on this page.
+                    </p>
 
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="row mt-sm-4">
+                        <div class="col-12 col-md-12 col-lg-5">
+                            <div class="card profile-widget">
+                                <div class="profile-widget-header">
+                                    <img alt="image" src="modules/img/avatar/avatar-1.png"
+                                         class="rounded-circle profile-widget-picture">
+                                    <div class="profile-widget-items">
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">角色</div>
+                                            <div class="profile-widget-item-value">
+                                                <small id="roleName"></small>
+                                            </div>
+                                        </div>
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">所属部门</div>
+                                            <div class="profile-widget-item-value">
+                                                <small id="groupName"></small>
+                                            </div>
+                                        </div>
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">注册日期</div>
+                                            <div class="profile-widget-item-value">
+                                                <small id="createTime"></small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-widget-description">
+                                    <div class="profile-widget-name section-title">姓名:
+                                        <span id="znName"></span>
+                                    </div>
+                                    <div class="profile-widget-name section-title">邮箱:
+                                        <span id="email"></span>
+                                    </div>
+                                    <div class="profile-widget-name section-title">备注:
+                                        <span id="groupDesc"></span>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center" style="margin-top: 4%">
+                                    <div class="font-weight-bold mb-2 text-uppercase">User information card</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-7">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4>Full Summernote</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control">
-                                        </div>
+                                <form method="post" class="needs-validation" novalidate="">
+                                    <div class="card-header">
+                                        <h4>设置角色和所属部门</h4>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric">
-                                                <option>Tech</option>
-                                                <option>News</option>
-                                                <option>Political</option>
-                                            </select>
-                                        </div>
+                                    <div class="card-body">
+                                        <form id="editForm">
+                                            <div class="section-title">选择角色</div>
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <select class="custom-select" id="roleId" name="roleId">
+                                                        <option value="0" selected>请选择</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="section-title">选择部门</div>
+                                            <div class="form-group">
+                                                <div class="selectric-group">
+                                                    <select class="custom-select" id="groupId" name="groupId">
+                                                        <option value="0">请选择</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote"></textarea>
-                                        </div>
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-primary">提交</button>
                                     </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <button onclick="demo()" class="btn btn-primary">Publish</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -519,5 +558,35 @@
 <script src="modules/js/jquery.selectric.min.js"></script>
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
+<script type="text/javascript">
+    $(function () {
+        roleList("roleId");
+        groupList("groupId");
+
+        $.ajax(({
+            url: BaseUrl + 'user/getUserOnCache',
+            type: 'get',
+            dataType: 'json',
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    switch (key) {
+                        case "roleId":
+                            document.getElementById(key).value = val;
+                            break;
+                        case "groupId":
+                            document.getElementById(key).value = val;
+                            break;
+                        default:
+                            $('#' + key).html(val);
+                            break;
+                    }
+                });
+            }
+        }))
+    })
+</script>
 </body>
 </html>

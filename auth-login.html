@@ -122,7 +122,7 @@
                 xhrFields: {withCredentials: true},
                 success: function (data) {
                     if (data == "SUCCESS") {
-                        noties.confirm("登录成功,正在跳转");
+                        // noties.confirm("登录成功,正在跳转");
                         setTimeout(window.location.href = "index.html", 10000);
                         ;
                     } else if (data == "PASSWORD_NOT_MATCH") {
