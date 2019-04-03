@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>注册 &mdash; 校园活动管理系统</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="modules/css/notyf.min.css">
+  <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+  <link rel="stylesheet" href="modules/css/all.min.css">
+  <link rel="stylesheet" href="modules/css/selectric.css">
+  <link rel="stylesheet" href="modules/css/style.css">
+  <link rel="stylesheet" href="modules/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="login-brand">
+              <img src="modules/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header"><h4>Register</h4></div>
+
+              <div class="card-body">
+                <form id="registerForm" method="POST" class="needs-validation" novalidate="" onsubmit="return false;">
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label>用户名</label>
+                      <input id="account" type="text" class="form-control" name="account" required autofocus placeholder="username">
+                      <div class="invalid-feedback">
+                        请输入账号
+                      </div>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="password" class="d-block">密码</label>
+                      <input id="password" type="password" class="form-control" name="password" required placeholder="" >
+                      <div class="invalid-feedback">
+                        请输入密码
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input id="email" type="email" class="form-control" name="email" required placeholder="example@live.cn">
+                    <div class="invalid-feedback">
+                      请输入邮箱
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">所属院级(社团)名称</label>
+                    <input id="groupDesc" type="text" class="form-control" name="groupDesc" required placeholder="如:XX学院或XX社团">
+                    <div class="invalid-feedback">
+                      请输入内容
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
+                      <label class="custom-control-label" for="agree">我同意条款和条件</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button id="btn-submit" type="submit" class="btn btn-primary btn-lg btn-block">
+                      注册
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="mt-5 text-muted text-center">
+              已有账号? <a href="auth-login.html">那就去登录吧!</a>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; 校园活动管理系统 2019
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="modules/js/jquery.min.js"></script>
+  <script src="modules/js/popper.js"></script>
+  <script src="modules/js/tooltip.js"></script>
+  <script src="modules/js/notyf.min.js"></script>
+  <script src="modules/js/bootstrap.min.js"></script>
+  <script src="modules/js/jquery.nicescroll.min.js"></script>
+  <script src="modules/js/moment.min.js"></script>
+  <script src="modules/js/stisla.js"></script>
+  <script src="modules/js/jquery.pwstrength.min.js"></script>
+  <script src="modules/js/jquery.selectric.min.js"></script>
+  <script src="modules/js/auth-register.js"></script>
+  <script src="modules/js/scripts.js"></script>
+  <script src="modules/js/custom.js"></script>
+  <script type="text/javascript">
+    var pf = $("#password_feedback")
+    $(function () {
+      $('#registerForm').submit(function () { //当提交表单时，会发生 submit 事件。
+        //Get
+        var account = $("#account").val();
+        var password = $("#password").val();
+        var groupDesc = $("#groupDesc").val();
+        var email = $("#email").val();
+
+        //Json
+        var postData = {
+          "account": account,
+          "password": password,
+          "groupDesc":groupDesc,
+          "email":email
+        };
+        //Ajax
+        $.ajax({
+          type: "POST",
+          url: BaseUrl + 'register',
+          data: postData,
+          beforeSend: function () {
+            $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+            $("#btn-submit").val("正在登陆...");
+          },
+          success: function (data) {
+            if (data == "SUCCESS") {
+              noties.confirm("注册成功,正在跳转");
+              setTimeout(window.location.href = "auth-login.html", 10000);
+            } else if (data == "USER_IS_EXIST") {
+              noties.alert("用户已存在");
+              $("#btn-submit").attr("disabled", false);
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

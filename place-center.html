@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>资源管理 &mdash; 校园活动管理系统</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+    <link rel="stylesheet" href="modules/css/all.min.css">
+    <link rel="stylesheet" href="modules/css/notyf.min.css">
+    <link rel="stylesheet" href="modules/css/style.css">
+    <link rel="stylesheet" href="modules/css/components.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA --></head>
+
+<body>
+<div class="tips"></div>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        <!--Nav :-->
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+
+            </form>
+            <!-- 右上角 -->
+            <ul class="navbar-nav navbar-right">
+                <!-- 头像部分 -->
+                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                </a>
+                    <!-- 弹框 -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!--上次登录时间-->
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-calendar"></i> 个人中心
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-sign-out-alt"></i>退出系统
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!--: Nav -->
+
+        <!--Sidebar:-->
+        <div class="main-sidebar sidebar-style-2">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index.html">
+                        <small>校内活动管理系统</small>
+                    </a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="index.html">CAMS</a>
+                </div>
+                <ul class="sidebar-menu" id="menu">
+
+                    <li class="menu-header">Dashboard</li>
+                    <li class="">
+                        <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+                    </li>
+
+                    <li class="menu-header">Person Center</li>
+
+                    <li class="">
+                        <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+                    </li>
+
+
+                    <li class="menu-header">Activity Center</li>
+                    <li class="">
+                        <a class="nav-link" href="activity-center.html"><i class="fab fa-centercode"></i><span>活动中心</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                    </li>
+
+                    <li class="menu-header">System Management</li>
+                    <li class="">
+                        <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+                    </li>
+                    <li class="active">
+                        <a class="nav-link" href="place-center.html"><i class="fas fa-map-signs"></i><span>资源管理</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <!--:Sidebar-->
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <!-- Page Header -->
+                <div class="section-header">
+                    <h1>用户管理:
+                        <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
+                    </h1>
+                </div>
+                <!-- Page Body -->
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!--body-->
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-striped table-md">
+                                            <thead>
+                                            <!--<td><div class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">活性</font></font></div></td>-->
+                                            <!--<td><a href="#" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">详情</font></font></a></td>-->
+                                            <tr>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">ID</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">中文姓名</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">角色名称</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">部门名称</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">注册日期</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">当前状态</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">注册时提供的部门描述</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">操作</font></font></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <nav class="d-inline-block" style="float: left">
+                                        <ul class="pagination mb-0">
+                                            <!--每页大小-->
+                                            <li class="page-item disabled">
+                                                <span class="page-link"><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;"><strong>每页<strong id="pageSize"
+                                                                                                           style="color: #0a001f"></strong>条</strong></font></font></span>
+                                            </li>
+                                            <!--总页数-->
+                                            <li class="page-item disabled">
+                                                <span class="page-link"><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;"><strong>共<strong id="pages"
+                                                                                                          style="color: #0a001f"></strong>页</strong></font></font></span>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <nav class="d-inline-block" style="float: right">
+                                        <ul class="pagination mb-0">
+                                            <!--上一页-->
+                                            <li id="judgeFirst" class="page-item">
+                                                <button class="page-link" onclick="pageTurning('pervious')"><i
+                                                        class="fas fa-chevron-left"></i></button>
+                                            </li>
+
+                                            <!--动态页码-->
+                                            <li class="page-item disabled">
+                                                <span class="page-link"><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;"><strong style="color: #0a001f"
+                                                                                                 id="currentNum"></strong></font></font></span>
+                                            </li>
+
+                                            <!--下一页-->
+                                            <li id="judgeLast" class="page-item">
+                                                <button class="page-link" onclick="pageTurning('next')"><i
+                                                        class="fas fa-chevron-right"></i></button>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright &copy; 2018
+                <div class="bullet"></div>
+                Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+            </div>
+            <div class="footer-right">
+                <a href="https://nauval.in/">校园活动管理系统</a>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- EditModal: -->
+<div id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true"
+     class="modal fade text-left" style="margin-top:10%;">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="EditModalLabel" class="modal-title">编辑申请表 </h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <form id="modal_edit">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>用户ID</label>
+                                <input name="userId" type="text" placeholder="" class="form-control" disabled>
+                            </div>
+                            <div class="col-md-6">
+                                <label>注册信息</label>
+                                <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>选择角色</label>
+                                <select name="roleId" id="roleId" class="form-control">
+                                    <option name="">请选择</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>选择部门</label>
+                                <select name="groupId" id="groupId" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="commitUpdate" type="button" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- :EditModal -->
+
+<!-- Del Modal: -->
+<!--<div id="delModal" tabindex="-1" role="dialog" aria-labelledby="DelModalLabel" aria-hidden="true"
+     class="modal fade text-left" style="margin-top:10%;">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="DelModalLabel" class="modal-title">用户管理 </h5>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                        aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="modal_del">
+                    <div class="form-group">
+                        <label>用户ID</label>
+                        <input name="userId" type="text" placeholder="" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>注册信息</label>
+                        <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>选择角色</label>
+                                <select name="roleId" id="a" class="form-control">
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>选择部门</label>
+                                <select name="groupId" id="aa" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="commitUpdate()" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- :Del Modal -->
+
+<!-- General JS Scripts -->
+<script src="modules/js/jquery.min.js"></script>
+<script src="modules/js/popper.js"></script>
+<script src="modules/js/tooltip.js"></script>
+<script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/jquery.nicescroll.min.js"></script>
+<script src="modules/js/moment.min.js"></script>
+<script src="modules/js/bootstrapValidator.js"></script>
+<script src="modules/js/stisla.js"></script>
+<script src="modules/js/notyf.min.js"></script>
+<script src="modules/js/scripts.js"></script>
+<script src="modules/js/custom.js"></script>
+<script type="text/javascript">
+    var Json = {"roleId": "roleId", "groupId": "groupId"};
+    var i = $("#currentNum").text();
+    var form =$('#modal_edit');
+    $(document).ready(function () {
+        form.bootstrapValidator({
+            message: '请输入内容',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                roleId: {
+                    validators: {
+                        notEmpty: {
+                            message: '角色不能为空'
+                        }
+                    }
+                },
+                groupId: {
+                    validators: {
+                        notEmpty: {
+                            message: '部门不能为空'
+                        }
+                    }
+                }
+            }
+
+        });
+    });
+    $("#commitUpdate").click(function () {
+        /* 通过name选择元素
+         * $('[name="startTime"]','#modal_edit').val()
+         */
+        var userId = $('input[name="userId"]', '#modal_edit').val();
+        var roleId = $('input[name="appTitle"]', '#modal_edit').val();
+        var groupId = $('input[name="startTime"]', '#modal_edit').val();
+        var user={"userId":userId,"roleId":roleId,"groupId":groupId};
+        //关闭模态框
+        $("#editModal").modal("hide");
+        $.ajax({
+            url: BaseUrl + 'user/modifyURGInfo',
+            type: "post",
+            data: user,
+            dataType: "text",
+            success: function (data) {
+                if (data == 'success') {
+                    noties.confirm("修改成功,表格数据将会自动刷新");
+                    refreshDataTables(i);
+
+                } else if (data == 'error') {
+                    noties.alertt == ("修改失败");
+                    refreshDataTables(i);
+                }
+            }
+        });
+    });
+
+
+    $(function () {
+        //初始化
+        pageInfoInit(Json);
+        refreshDataTables(1);
+    })
+
+    /**
+     * 翻页函数
+     */
+    function pageTurning(val) {
+        var i = $("#currentNum").text();
+        if (val == "pervious") {
+            i--;
+        }
+        if (val == "next") {
+            i++;
+        }
+        refreshDataTables(i);
+    }
+
+    /**
+     * 渲染表格
+     */
+    function renderTable(JsonData) {
+        // clear
+        $("#dataTable").find("tbody").html("");
+        //动态页码设置
+        $("#currentNum").html(JsonData.pageNum);
+        $("#pageSize").html(JsonData.pageSize);
+        $("#pages").html(JsonData.pages);
+        //动态生成表格
+        for (i in JsonData.result) {
+            var tr;
+            tr =
+                '<td data-tag="userId">' + JsonData.result[i].userId + '</td>' +
+                '<td data-tag="roleId" style="display:none;">' + JsonData.result[i].roleId + '</td>' +
+                '<td data-tag="groupId" style="display:none;">' + JsonData.result[i].groupId + '</td>' +
+                '<td data-tag="znName">' + JsonData.result[i].znName + '</td>' +
+                '<td data-tag="roleName">' + identityTag(JsonData.result[i].roleName) + '</td>' +
+                '<td data-tag="groupName">' + identityTag(JsonData.result[i].groupName) + '</td>' +
+                '<td data-tag="createTime">' + JsonData.result[i].createTime + '</td>' +
+                '<td data-tag="isEff">' + isEffTag(JsonData.result[i].isEff) + '</td>' +
+                '<td data-tag="groupDesc">' + JsonData.result[i].groupDesc + '</td>' +
+                '<td>' +
+                '<button type="button" onclick="editThis(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
+                '<button type="button" onclick="delUser(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
+                '</td>'
+            $("#dataTable").append('<tr>' + tr + '</tr>')
+        }
+        //首尾页判断
+        if (JsonData.pageNum == 1) {
+            $("#judgeFirst").addClass("disabled");
+        } else {
+            $("#judgeFirst").removeClass("disabled");
+        }
+        if (JsonData.pageNum == JsonData.pages) {
+            $("#judgeLast").addClass("disabled");
+        } else {
+            $("#judgeLast").removeClass("disabled");
+        }
+    }
+
+
+    /**
+     * 刷新数据表
+     */
+    function refreshDataTables(pageNum) {
+        if (pageNum == null) {
+            pageNum = $("#currentNum").text();
+        }
+        $.ajax({
+            url: BaseUrl + 'user/getURGInfoListByPage',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                pageNum: pageNum || 1,
+                // pageSize: pagesize || 7
+            },
+            success: function (data) {
+                renderTable(data);
+            }
+        })
+    }
+
+    /**
+     * 编辑模态框
+     */
+    function editThis(btn) {
+        //显示模态框
+        $("#editModal").modal('show');
+        //寻找此按钮附近最近的tr标签
+        var currnet_row = $(btn).parents('tr');
+        //Json
+        var Json = {};
+        //获取指定内容
+        Json.userId = currnet_row.find("td[data-tag='userId']").html();
+        Json.groupDesc = currnet_row.find("td[data-tag='groupDesc']").html();
+        Json.roleId = currnet_row.find("td[data-tag='roleId']").html();
+        Json.groupId = currnet_row.find("td[data-tag='groupId']").html();
+        //修改输入框默认值
+        $.each(Json, function (key, val) {
+            $("#modal_edit").find("input[name='" + key + "']").val(val);
+            $("#modal_edit").find("select[name='" + key + "']").val(val);
+        });
+    }
+
+
+</script>
+</body>
+</html>

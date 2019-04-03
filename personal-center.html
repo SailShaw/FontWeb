@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>个人中心 &mdash; 校园活动管理系统</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+  <link rel="stylesheet" href="modules/css/all.min.css">
+  <link rel="stylesheet" href="modules/css/bootstrap-social.css">
+  <link rel="stylesheet" href="modules/css/summernote-bs4.css">
+  <link rel="stylesheet" href="modules/css/style.css">
+  <link rel="stylesheet" href="modules/css/components.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <!--Nav :-->
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+            </li>
+          </ul>
+
+        </form>
+        <!-- 右上角 -->
+        <ul class="navbar-nav navbar-right">
+          <!-- 头像部分 -->
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                  class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+          </a>
+            <!-- 弹框 -->
+            <div class="dropdown-menu dropdown-menu-right">
+              <!--上次登录时间-->
+              <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="fas fa-calendar"></i> 个人中心
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="fas fa-sign-out-alt"></i>退出系统
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!--: Nav -->
+
+      <!--Sidebar:-->
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html">
+              <small>校内活动管理系统</small>
+            </a>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">CAMS</a>
+          </div>
+          <ul class="sidebar-menu" id="menu">
+
+            <li class="menu-header">Dashboard</li>
+            <li class="">
+              <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+            </li>
+
+            <li class="menu-header">Person Center</li>
+
+            <li class="active">
+              <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+            </li>
+
+
+            <li class="menu-header">Activity Center</li>
+            <li class="">
+              <a class="nav-link" href="activity-center.html"><i class="fab fa-centercode"></i><span>活动中心</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+            </li>
+
+            <li class="menu-header">System Management</li>
+            <li class="">
+              <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="place-center.html"><i class="fas fa-map-signs"></i><span>资源管理</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <!--:Sidebar-->
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Profile</h1>
+            <div class="section-header-breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-tachometer-alt"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 家</font></font></a></li>
+                <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 图书馆</font></font></a></li>
+                <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 数据</font></font></li>
+              </ol>
+              <!--<div class="breadcrumb-item active"><a href="index.html">首页</a></div>
+              <div class="breadcrumb-item">个人中心</div>-->
+            </div>
+          </div>
+          <div class="section-body">
+            <h2 class="section-title">Hi, <span name="znName">辛雅</span>!</h2>
+            <p class="section-lead">
+              在此页面上更改有关您自己的信息。
+            </p>
+
+            <div class="row mt-sm-4">
+              <div class="col-12 col-md-12 col-lg-5">
+                <div class="card profile-widget">
+                  <div class="profile-widget-header">                     
+                    <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                    <div class="profile-widget-items">
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">角色</div>
+                        <div class="profile-widget-item-value"><small name="roleName">系统管理员</small></div>
+                      </div>
+                      <div class="profile-widget-item">
+                        <div class="profile-widget-item-label">部门</div>
+                        <div class="profile-widget-item-value"><small name="roleName">系统管理员</small></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-widget-description">
+                    <div class="profile-widget-name">Ujang Maman
+                      <div class="text-muted d-inline font-weight-normal">
+                        <div class="slash"></div> Web Developer
+                      </div>
+                    </div>
+                    Ujang maman is a superhero name in <b>Indonesia</b>,
+                    especially in my family. He is not a fictional character but an original hero in my family,
+                    a hero for his children and for his wife. So, I use the name as a user in this template.
+                    Not a tribute, I'm just bored with <b>'John Doe'</b>.
+                  </div>
+                  <!--社交账号-->
+                  <div class="card-footer text-center">
+                    <div class="font-weight-bold mb-2">Follow Ujang On</div>
+                    <a href="#" class="btn btn-social-icon btn-facebook mr-1">
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="btn btn-social-icon btn-twitter mr-1">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-social-icon btn-github mr-1">
+                      <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-social-icon btn-instagram">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-12 col-lg-7">
+                <div class="card">
+                  <form method="post" class="needs-validation" novalidate="">
+                    <div class="card-body" style="margin-top: 6.5%;">
+                        <div class="row">                               
+                          <div class="form-group col-md-6 col-12">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" value="Ujang" required="">
+                            <div class="invalid-feedback">
+                              Please fill in the first name
+                            </div>
+                          </div>
+                          <div class="form-group col-md-6 col-12">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" value="Maman" required="">
+                            <div class="invalid-feedback">
+                              Please fill in the last name
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-md-7 col-12">
+                            <label>Email</label>
+                            <input type="email" class="form-control" value="ujang@maman.com" required="">
+                            <div class="invalid-feedback">
+                              Please fill in the email
+                            </div>
+                          </div>
+                          <div class="form-group col-md-5 col-12">
+                            <label>Phone</label>
+                            <input type="tel" class="form-control" value="">
+                          </div>
+                        </div>
+
+                        <!--<div class="row">
+                          <div class="form-group col-12">
+                            <label>Bio</label>
+                            <textarea class="form-control summernote-simple">Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.</textarea>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group mb-0 col-12">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" name="remember" class="custom-control-input" id="newsletter">
+                              <label class="custom-control-label" for="newsletter">Subscribe to newsletter</label>
+                              <div class="text-muted form-text">
+                                You will get new information about products, offers and promotions
+                              </div>
+                            </div>
+                          </div>
+                        </div>-->
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-primary">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+        </div>
+        <div class="footer-right">
+          
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="modules/js/jquery.min.js"></script>
+  <script src="modules/js/popper.js"></script>
+  <script src="modules/js/tooltip.js"></script>
+  <script src="modules/js/bootstrap.min.js"></script>
+  <script src="modules/js/jquery.nicescroll.min.js"></script>
+  <script src="modules/js/moment.min.js"></script>
+  <script src="modules/js/stisla.js"></script>
+  <script src="modules/js/summernote-bs4.js"></script>
+  <script src="modules/js/scripts.js"></script>
+  <script src="modules/js/custom.js"></script>
+</body>
+</html>
