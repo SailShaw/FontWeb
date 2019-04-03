@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>校园活动系统</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+    <link rel="stylesheet" href="modules/css/all.min.css">
+    <link rel="stylesheet" href="modules/css/jqvmap.min.css">
+    <link rel="stylesheet" href="modules/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="modules/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="modules/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="modules/css/style.css">
+    <link rel="stylesheet" href="modules/css/components.css">
+    <link rel="stylesheet" href="modules/css/notyf.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA --></head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        <!--Nav :-->
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+
+            </form>
+            <!-- 右上角 -->
+            <ul class="navbar-nav navbar-right">
+                <!-- 头像部分 -->
+                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                </a>
+                    <!-- 弹框 -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!--上次登录时间-->
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-calendar"></i> 个人中心
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-sign-out-alt"></i>退出系统
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!--: Nav -->
+
+        <!--Sidebar:-->
+        <div class="main-sidebar sidebar-style-2">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index.html">
+                        <small>校内活动管理系统</small>
+                    </a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="index.html">CAMS</a>
+                </div>
+                <ul class="sidebar-menu" id="menu">
+
+                    <li class="menu-header">Dashboard</li>
+                    <li class="active">
+                        <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+                    </li>
+
+                    <li class="menu-header">Person Center</li>
+
+                    <li>
+                        <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+                    </li>
+
+
+                    <li class="menu-header">Activity Center</li>
+                    <li>
+                        <a class="nav-link" href="activity-center.html"><i class="fab fa-centercode"></i><span>活动中心</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                    </li>
+
+                    <li class="menu-header">System Management</li>
+                    <li>
+                        <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="place-center.html"><i class="fas fa-map-signs"></i><span>资源管理</span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <!--:Sidebar-->
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="card-stats">
+                                <div class="card-stats-title">Order Statistics -
+                                    <div class="dropdown d-inline">
+                                        <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
+                                           id="orders-month">August</a>
+                                        <ul class="dropdown-menu dropdown-menu-sm">
+                                            <li class="dropdown-title">Select Month</li>
+                                            <li><a href="#" class="dropdown-item">January</a></li>
+                                            <li><a href="#" class="dropdown-item">February</a></li>
+                                            <li><a href="#" class="dropdown-item">March</a></li>
+                                            <li><a href="#" class="dropdown-item">April</a></li>
+                                            <li><a href="#" class="dropdown-item">May</a></li>
+                                            <li><a href="#" class="dropdown-item">June</a></li>
+                                            <li><a href="#" class="dropdown-item">July</a></li>
+                                            <li><a href="#" class="dropdown-item active">August</a></li>
+                                            <li><a href="#" class="dropdown-item">September</a></li>
+                                            <li><a href="#" class="dropdown-item">October</a></li>
+                                            <li><a href="#" class="dropdown-item">November</a></li>
+                                            <li><a href="#" class="dropdown-item">December</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-stats-items">
+                                    <div class="card-stats-item">
+                                        <div class="card-stats-item-count">24</div>
+                                        <div class="card-stats-item-label">Pending</div>
+                                    </div>
+                                    <div class="card-stats-item">
+                                        <div class="card-stats-item-count">12</div>
+                                        <div class="card-stats-item-label">Shipping</div>
+                                    </div>
+                                    <div class="card-stats-item">
+                                        <div class="card-stats-item-count">23</div>
+                                        <div class="card-stats-item-label">Completed</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-icon shadow-primary bg-primary">
+                                <i class="fas fa-archive"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Total Orders</h4>
+                                </div>
+                                <div class="card-body">
+                                    59
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="card-chart">
+                                <canvas id="balance-chart" height="80"></canvas>
+                            </div>
+                            <div class="card-icon shadow-primary bg-primary">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Balance</h4>
+                                </div>
+                                <div class="card-body">
+                                    $187,13
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="card-chart">
+                                <canvas id="sales-chart" height="80"></canvas>
+                            </div>
+                            <div class="card-icon shadow-primary bg-primary">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                    <h4>Sales</h4>
+                                </div>
+                                <div class="card-body">
+                                    4,732
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Budget vs Sales</h4>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="myChart" height="132"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <!--todo:-->
+                        <div class="card card-hero">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="far fa-question-circle"></i>
+                                </div>
+                                <h4>14</h4>
+                                <div class="card-description">Customers need help</div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="tickets-list">
+                                    <a href="#" class="ticket-item">
+                                        <div class="ticket-title">
+                                            <h4>My order hasn't arrived yet</h4>
+                                        </div>
+                                        <div class="ticket-info">
+                                            <div>Laila Tazkiah</div>
+                                            <div class="bullet"></div>
+                                            <div class="text-primary">1 min ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="ticket-item">
+                                        <div class="ticket-title">
+                                            <h4>Please cancel my order</h4>
+                                        </div>
+                                        <div class="ticket-info">
+                                            <div>Rizal Fakhri</div>
+                                            <div class="bullet"></div>
+                                            <div>2 hours ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="ticket-item">
+                                        <div class="ticket-title">
+                                            <h4>Do you see my mother?</h4>
+                                        </div>
+                                        <div class="ticket-info">
+                                            <div>Syahdan Ubaidillah</div>
+                                            <div class="bullet"></div>
+                                            <div>6 hours ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="ticket-item">
+                                        <div class="ticket-title">
+                                            <h4>Do you see my mother?</h4>
+                                        </div>
+                                        <div class="ticket-info">
+                                            <div>Syahdan Ubaidillah</div>
+                                            <div class="bullet"></div>
+                                            <div>6 hours ago</div>
+                                        </div>
+                                    </a>
+                                    <a href="features-tickets.html" class="ticket-item ticket-more">
+                                        View All <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--:todo-->
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright &copy; 2018
+                <div class="bullet"></div>
+                Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+            </div>
+            <div class="footer-right">
+
+            </div>
+        </footer>
+    </div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="modules/js/jquery.min.js"></script>
+<script src="modules/js/popper.js"></script>
+<script src="modules/js/tooltip.js"></script>
+<script src="modules/js/notyf.min.js"></script>
+<script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/jquery.nicescroll.min.js"></script>
+<script src="modules/js/moment.min.js"></script>
+<script src="modules/js/stisla.js"></script>
+<script src="modules/js/jquery.sparkline.min.js"></script>
+<script src="modules/js/chart.min.js"></script>
+<script src="modules/js/owl.carousel.min.js"></script>
+<script src="modules/summernote/summernote-bs4.js"></script>
+<script src="modules/js/jquery.chocolat.min.js"></script>
+<script src="modules/js/index.js"></script>
+<script src="modules/js/scripts.js"></script>
+<script src="modules/js/custom.js"></script>
+<script type="text/javascript">
+    var Json = {};
+    $(function () {
+        navInfo();
+    })
+</script>
+</body>
+</html>
