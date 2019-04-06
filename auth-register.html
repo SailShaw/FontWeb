@@ -132,11 +132,11 @@
         //Ajax
         $.ajax({
           type: "POST",
-          url: BaseUrl + 'register',
+          url: BaseUrl + '/register',
           data: postData,
           beforeSend: function () {
             $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
-            $("#btn-submit").val("正在登陆...");
+            $("#btn-submit").val("正在提交...");
           },
           success: function (data) {
             if (data == "SUCCESS") {

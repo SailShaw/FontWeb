@@ -47,19 +47,19 @@
                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
                 </a>
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="personal-center.html" class="dropdown-item has-icon">
                             <i class="fas fa-calendar"></i> 个人中心
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="javascript:void(0);" onclick="loginOut()" class="dropdown-item has-icon">
                             <i class="fas fa-sign-out-alt"></i>退出系统
                         </a>
                     </div>
@@ -242,7 +242,10 @@
 <script type="text/javascript">
     var i = $("#currentNum").text();
     $(function () {
+        //nav信息加载
+        navInfo();
         refreshDataTables(1);
+
     })
 
     //翻页
@@ -303,7 +306,7 @@
             pageNum = $("#currentNum").text();
         }
         $.ajax({
-            url: BaseUrl + 'user/getURGInfoListByPage',
+            url: BaseUrl + '/user/getURGInfoListByPage',
             type: 'get',
             dataType: 'json',
             data: {
@@ -319,7 +322,7 @@
         var userId = $(btn).parents('tr').find("td[data-tag='userId']").html();
         var ajaxData = {"userId":userId};
         $.ajax({
-            url: BaseUrl + 'user/getUserToFind',
+            url: BaseUrl + '/user/getUserToFind',
             data: ajaxData,
             type: 'post',
             dataType: 'text',
@@ -328,17 +331,32 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 if (data == 'SUCCESS'){
-                    window.location.href="users-edit.html";
-                }else if(data == 'JSON_IS_NULL'){
-                    swal("Sorry","数据获取异常","warning")
+                    window.location.href="users-detail.html";
+                }else {
+                    swal({
+                        title: "数据获取异常",
+                        icon: "error"
+                    }).then((willTrue)=>{
+                        refreshDataTables(i);
+                    })
                 }
             },
             error: function (data) {
                 switch (data.status) {
                     case 404:
-                        swal("Oops","服务器出了点小问题","error");
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            refreshDataTables(i);
+                        })
                     case 500:
-                        swal("Oops","服务器出了点小问题","error");
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            refreshDataTables(i);
+                        })
                 }
             }
         })
@@ -351,21 +369,50 @@
         var ajaxData = {"userId":userId,"znName":znName};
         swal({
             title: '确定删除用户"'+znName+'"吗?',
-            text: '该账号将被置为无效用户,无法登录系统',
             icon: 'warning',
             buttons: true,
             dangerMode: true,
         }).then((willDelete)=>{
             if (willDelete){
                 $.ajax({
-                    url: BaseUrl + 'user/deleteUserByID',
+                    url: BaseUrl + '/user/deleteUserByID',
                     data: ajaxData,
                     type: 'post',
                     dataType: 'text',
                     success: function (data) {
                         if (data == 'SUCCESS'){
-                            swal("该用户已被删除",{icon:"success"});
-                            refreshDataTables(i);
+                            swal({
+                                title: "操作成功",
+                                icon: "success"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+
+                        }else {
+                            swal({
+                                title: "操作失败",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+                        }
+                    },
+                    error: function (data) {
+                        switch (data.status) {
+                            case 404:
+                                swal({
+                                    title: "找不到您要查找的页面",
+                                    icon: "error"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                })
+                            case 500:
+                                swal({
+                                    title: "服务器出了点小问题",
+                                    icon: "error"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                })
                         }
                     }
                 })

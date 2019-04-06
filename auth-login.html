@@ -6,7 +6,6 @@
     <title>登录 &mdash; 校园活动管理系统</title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
     <link rel="stylesheet" href="modules/css/bootstrap-social.css">
@@ -94,7 +93,7 @@
 <script src="modules/js/jquery.min.js"></script>
 <script src="modules/js/popper.js"></script>
 <script src="modules/js/tooltip.js"></script>
-<script src="modules/js/notyf.min.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/bootstrap.min.js"></script>
 <script src="modules/js/jquery.nicescroll.min.js"></script>
 <script src="modules/js/moment.min.js"></script>
@@ -112,7 +111,7 @@
             //Ajax
             $.ajax({
                 type: "POST",
-                url: BaseUrl + 'login',
+                url: BaseUrl + '/login',
                 data: postData,
                 beforeSend: function () {
                     $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单

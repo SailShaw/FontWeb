@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
     <link rel="stylesheet" href="modules/css/notyf.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -50,12 +49,12 @@
                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
                 </a>
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item has-icon">
@@ -101,7 +100,7 @@
                         <a class="nav-link" href="activity-center.html"><i class="fab fa-centercode"></i><span>活动中心</span></a>
                     </li>
                     <li>
-                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-typo3"></i><span>审核管理</span></a>
                     </li>
 
                     <li class="menu-header">System Management</li>
@@ -128,8 +127,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="card card-statistic-2">
                             <div class="card-stats">
-                                <div class="card-stats-title">Order Statistics -
-                                    <div class="dropdown d-inline">
+                                <div class="card-stats-title">数据统计
+                                    <!--<div class="dropdown d-inline">
                                         <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#"
                                            id="orders-month">August</a>
                                         <ul class="dropdown-menu dropdown-menu-sm">
@@ -147,20 +146,20 @@
                                             <li><a href="#" class="dropdown-item">November</a></li>
                                             <li><a href="#" class="dropdown-item">December</a></li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="card-stats-items">
                                     <div class="card-stats-item">
-                                        <div class="card-stats-item-count">24</div>
-                                        <div class="card-stats-item-label">Pending</div>
+                                        <div class="card-stats-item-count" id="pending"></div>
+                                        <div class="card-stats-item-label">待审核</div>
                                     </div>
                                     <div class="card-stats-item">
-                                        <div class="card-stats-item-count">12</div>
-                                        <div class="card-stats-item-label">Shipping</div>
+                                        <div class="card-stats-item-count" id="passed"></div>
+                                        <div class="card-stats-item-label">已通过</div>
                                     </div>
                                     <div class="card-stats-item">
-                                        <div class="card-stats-item-count">23</div>
-                                        <div class="card-stats-item-label">Completed</div>
+                                        <div class="card-stats-item-count" id="noPassed"></div>
+                                        <div class="card-stats-item-label">未通过</div>
                                     </div>
                                 </div>
                             </div>
@@ -169,10 +168,10 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total Orders</h4>
+                                    <strong>活动申请总数</strong>
                                 </div>
-                                <div class="card-body">
-                                    59
+                                <div class="card-body" id="applicationTotal">
+
                                 </div>
                             </div>
                         </div>
@@ -187,10 +186,10 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Balance</h4>
+                                    <strong>已注册用户总数</strong>
                                 </div>
-                                <div class="card-body">
-                                    $187,13
+                                <div class="card-body" id="userCount">
+
                                 </div>
                             </div>
                         </div>
@@ -205,10 +204,10 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Sales</h4>
+                                    <strong>资源总数</strong>
                                 </div>
-                                <div class="card-body">
-                                    4,732
+                                <div class="card-body" id="placeCount">
+
                                 </div>
                             </div>
                         </div>
@@ -220,7 +219,7 @@
                     <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Budget vs Sales</h4>
+                                <h4>上一周活动申请提交统计</h4>
                             </div>
                             <div class="card-body">
                                 <canvas id="myChart" height="132"></canvas>
@@ -236,53 +235,10 @@
                                     <i class="far fa-question-circle"></i>
                                 </div>
                                 <h4>14</h4>
-                                <div class="card-description">Customers need help</div>
+                                <div class="card-description"><smal>两周内新提交的申请表</smal></div>
                             </div>
                             <div class="card-body p-0">
-                                <div class="tickets-list">
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>My order hasn't arrived yet</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Laila Tazkiah</div>
-                                            <div class="bullet"></div>
-                                            <div class="text-primary">1 min ago</div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>Please cancel my order</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Rizal Fakhri</div>
-                                            <div class="bullet"></div>
-                                            <div>2 hours ago</div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>Do you see my mother?</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Syahdan Ubaidillah</div>
-                                            <div class="bullet"></div>
-                                            <div>6 hours ago</div>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="ticket-item">
-                                        <div class="ticket-title">
-                                            <h4>Do you see my mother?</h4>
-                                        </div>
-                                        <div class="ticket-info">
-                                            <div>Syahdan Ubaidillah</div>
-                                            <div class="bullet"></div>
-                                            <div>6 hours ago</div>
-                                        </div>
-                                    </a>
-                                    <a href="features-tickets.html" class="ticket-item ticket-more">
-                                        View All <i class="fas fa-chevron-right"></i>
-                                    </a>
+                                <div class="tickets-list" id="twoWeekData">
                                 </div>
                             </div>
                         </div>
@@ -322,9 +278,124 @@
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
+    var ctx = document.getElementById("myChart").getContext('2d');
     var Json = {};
     $(function () {
         navInfo();
+
+        $.ajax({
+            url:BaseUrl + '/global/dataStatistics',
+            type: 'get',
+            dataType: 'json',
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                $.each(data,function (key,val) {
+                    switch (key) {
+                        case "total":
+                            $("#applicationTotal").html(val);
+                            break;
+                        case "typeCount":
+                            for (var i in val) {
+                                switch (i) {
+                                    case "0":
+                                        $("#pending").html(val[i].total);
+                                        break;
+                                    case "1":
+                                        $("#passed").html(val[i].total);
+                                        break;
+                                    default:
+                                        $("#noPassed").html(val[i].total);
+                                        break;
+                                }
+                            }
+                            break;
+                        case "userCount":
+                            $("#userCount").html(val);
+                            break;
+                        case "placeCount":
+                            $("#placeCount").html(val);
+                            break;
+                        case "twoWeekDataCount":
+                            for (var i in val) {
+                                $("#twoWeekData").append(
+                                    "<a href='#' class='ticket-item'>" +
+                                    "<div class='ticket-title'>" +
+                                    "<h4>"+val[i].activityTitle+"</h4>" +
+                                    "</div>" +
+                                    "<div class='ticket-info'>" +
+                                    "<div>"+val[i].znname+"</div>" +
+                                    "<div class='bullet'></div>" +
+                                    "<div class='text-primary'>"+val[i].createTime+"</div>" +
+                                    "</div>" +
+                                    "</a>");
+                            }
+                            $("#twoWeekData").append(
+                                "<a href='activity-center.html' class='ticket-item ticket-more'>" +
+                                "View All<i class='fas fa-chevron-right'></i></a>");
+                            break;
+                        case "lastWeekNumCount":
+                            xData = new Array();
+                            yData = new Array();
+                            for (var i in val) {
+                                xData.push(val[i].weekDay);
+                                yData.push(val[i].countNum);
+                            }
+                            var myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: xData,
+                                    datasets: [{
+                                        label: '当天提交数',
+                                        data: yData,
+                                        // borderWidth: 2,
+                                        backgroundColor: 'rgba(63,82,227,.8)',
+                                        borderWidth: 0,
+                                        borderColor: 'transparent',
+                                        pointBorderWidth: 5,
+                                        pointRadius: 5,
+                                        pointColor: "rgba(220,220,220,1)",
+                                        // pointBackgroundColor: 'transparent',
+                                        pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
+                                    }
+                                    ]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    scales: {
+                                        yAxes: [{
+                                            gridLines: {
+                                                // display: false,
+                                                drawBorder: false,
+                                                color: '#f2f2f2',
+                                            },
+                                            ticks: {
+                                                beginAtZero: true,
+                                                stepSize: 10,
+                                                callback: function(value, index, values) {
+                                                    return '$' + value;
+                                                }
+                                            }
+                                        }],
+                                        xAxes: [{
+                                            gridLines: {
+                                                display: false,
+                                                tickMarkLength: 15,
+                                            }
+                                        }]
+                                    },
+                                }
+                            });
+                            break;
+
+
+                    }
+                })
+            }
+        })
     })
 </script>
 </body>

@@ -1,34 +1,24 @@
 "use strict";
 
-var ctx = document.getElementById("myChart").getContext('2d');
+/*var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["January", "February", "March", "April", "May", "June", "July", "August"],
+    labels: ["1", "2", "3", "4", "5", "6", "7"],
     datasets: [{
-      label: 'Sales',
-      data: [3200, 1800, 4305, 3022, 6310, 5120, 5880, 6154],
+      label: '当天提交数',
+      data: [33, 43, 34, 41, 50, 60, 78],
       // borderWidth: 2,
       backgroundColor: 'rgba(63,82,227,.8)',
       borderWidth: 0,
       borderColor: 'transparent',
-      pointBorderWidth: 0,
-      pointRadius: 3.5,
-      pointBackgroundColor: 'transparent',
+      pointBorderWidth: 5,
+      pointRadius: 5,
+      pointColor: "rgba(220,220,220,1)",
+      // pointBackgroundColor: 'transparent',
       pointHoverBackgroundColor: 'rgba(63,82,227,.8)',
-    },
-    {
-      label: 'Budget',
-      data: [2207, 3403, 2200, 5025, 2302, 4208, 3880, 4880],
-      // borderWidth: 2,
-      backgroundColor: 'rgba(254,86,83,.7)',
-      borderWidth: 0,
-      borderColor: 'transparent',
-      pointBorderWidth: 0 ,
-      pointRadius: 3.5,
-      pointBackgroundColor: 'transparent',
-      pointHoverBackgroundColor: 'rgba(254,86,83,.8)',
-    }]
+    }
+    ]
   },
   options: {
     legend: {
@@ -43,7 +33,7 @@ var myChart = new Chart(ctx, {
         },
         ticks: {
           beginAtZero: true,
-          stepSize: 1500,
+          stepSize: 10,
           callback: function(value, index, values) {
             return '$' + value;
           }
@@ -57,7 +47,7 @@ var myChart = new Chart(ctx, {
       }]
     },
   }
-});
+});*/
 
 var balance_chart = document.getElementById("balance-chart").getContext('2d');
 

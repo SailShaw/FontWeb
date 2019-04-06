@@ -2,11 +2,11 @@
  *
  * You can write your JS code here, DO NOT touch the default style file
  * because it will make it harder for you to update.
- * 
+ *
  */
 
 "use strict";
-(function(root){
+(function (root) {
     /**
      * 全局变量
      * 1.后端请求地址包装
@@ -14,19 +14,12 @@
      * @type {string}
      */
     // 后端请求路径
-    root.BaseUrl = 'http://localhost:8888/';
-
-    // 全局通知插件初始化
-    // root.noties = new Notyf({
-    //     delay:2000,//延时
-    //     alertIcon: 'fa fa-exclamation-circle',//警告提示图标
-    //     confirmIcon:'fa fa-check-circle'//成功提示图标
-    // });
+    root.BaseUrl = 'http://localhost:8888';
 
     //全局Nav信息
-    root.navInfo = function (){
+    root.navInfo = function () {
         $.ajax({
-            url: BaseUrl + 'global/getLoginUserInfo',
+            url: BaseUrl + '/global/getLoginUserInfo',
             type: 'get',
             dataType: 'json',
             //解决session不共享
@@ -34,9 +27,38 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 $.each(data, function (key, val) {
-                    $('#' + key).html(val);
+                    if (data != null) {
+                        switch (key) {
+                            case "znName":
+                                $("#current_znName").html(val);
+                                break;
+                            case "lastLogin":
+                                $("#current_lastLogin").html(val);
+                            default:
+                                break;
+                        }
+                    }else {
+                        window.location.href="auth-login.html";
+                    }
                 });
             }
+        })
+    }
+
+    //退出登录
+    root.loginOut = function () {
+        $.ajax({
+            url: BaseUrl + '/loginOut',
+            type: 'get',
+            dataType: 'text',
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                if (data == 'SUCCESS') {
+                    window.location.href = "auth-login.html";
+                }
+            },
         })
     }
 
@@ -68,7 +90,7 @@
     //角色下拉列表
     root.roleList = function (val) {
         $.ajax({
-            url: BaseUrl + 'global/getRoleList',
+            url: BaseUrl + '/global/getRoleList',
             type: 'get',
             dataType: 'json',
             //解决session不共享
@@ -77,7 +99,7 @@
             success: function (data) {
                 //动态生成下拉列表框
                 for (var i in data) {
-                    $("#"+val).append("<option value='" + data[i].roleId + "'>" + data[i].roleName + "</option>");
+                    $("#" + val).append("<option value='" + data[i].roleId + "'>" + data[i].roleName + "</option>");
                 }
             },
         });
@@ -86,7 +108,7 @@
     //部门下拉列表
     root.groupList = function (val) {
         $.ajax({
-            url: BaseUrl + 'global/getGroupList',
+            url: BaseUrl + '/global/getGroupList',
             type: 'get',
             dataType: 'json',
             //解决session不共享
@@ -95,16 +117,16 @@
             success: function (data) {
                 //动态生成下拉列表框
                 for (var i in data) {
-                    $("#"+val).append("<option value='" + data[i].groupId + "'>" + data[i].groupName + "</option>");
+                    $("#" + val).append("<option value='" + data[i].groupId + "'>" + data[i].groupName + "</option>");
                 }
             },
         });
     }
-    
+
     //场地下拉列表
     root.palceList = function (val) {
         $.ajax({
-            url: BaseUrl + 'global/getPlaceList',
+            url: BaseUrl + '/global/getPlaceList',
             type: 'get',
             dataType: 'json',
             //解决session不共享
@@ -113,7 +135,7 @@
             success: function (data) {
                 //动态生成下拉列表框
                 for (var i in data) {
-                    $("#"+val).append("<option value='" + data[i].placeId + "'>" + data[i].placeName + "</option>");
+                    $("#" + val).append("<option value='" + data[i].placeId + "'>" + data[i].placeName + "</option>");
                 }
             },
         });
@@ -125,16 +147,16 @@
      */
     //用户身份标签
     root.identityTag = function (val) {
-        if (val == null){
+        if (val == null) {
             return '<div class="badge badge-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未分配</font></font></div>'
-        }else{
-            return '<div class="badge badge-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'+val+'</font></font></div>'
+        } else {
+            return '<div class="badge badge-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">' + val + '</font></font></div>'
         }
     };
 
     //有效状态标签
-    root.isEffTag = function (str) {
-        switch (str) {
+    root.isEffTag = function (val) {
+        switch (val) {
             case "1":
                 return '<div class="badge badge-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">无效</font></font></div>'
             default:
@@ -143,13 +165,13 @@
     };
 
     // 系统日志标签
-    root.modifyColor = function (str,color) {
-        return '<strong><p class="text-'+color+'">'+str+'</p></strong>'
+    root.modifyColor = function (val, color) {
+        return '<strong><p class="text-' + color + '">' + val + '</p></strong>'
     };
 
     // 场地类型标签
-    root.setPlaceType = function (str) {
-        switch (str) {
+    root.setPlaceType = function (val) {
+        switch (val) {
             case "1":
                 return '<strong><p class="text-primary">室外</p></strong>'
             default:
@@ -157,9 +179,43 @@
         }
     };
 
+    root.offTag = function (val) {
+        switch (val) {
+            case "1":
+                return '<div class="badge badge-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已关闭</font></font></div>'
+            default:
+                return '<div class="badge badge-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未关闭</font></font></div>'
+        }
+    }
+    root.verifyTag = function (val) {
+        switch (val) {
 
+            // <span class="badge badge-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">小学</font></font></span>
 
+            case "1":
+                return '<span class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已通过</font></font></span>'
+            case "2":
+                return '<div class="badge badge-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未通过</font></font></div>'
+            default:
+                return '<div class="badge badge-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">待审</font></font></div>'
+        }
+    }
+    root.editStatus = function (val,data){
+        if(val == 1){
+            //将所有输入框或下拉列表添加禁用标记
+            $.each(data,function (key,val) {
+                $("#"+key).attr("disabled", true);
+            })
+        }else{
+            //取消禁用标记
+            $.each(data,function (key,val) {
+                $("#"+key).attr("disabled", false);
+            })
+        }
+    }
+    root.chartFunc = function (tagName,xData,yData) {
 
+    }
 
 
 }(this));

@@ -563,8 +563,8 @@
         roleList("roleId");
         groupList("groupId");
 
-        $.ajax(({
-            url: BaseUrl + 'user/getUserOnCache',
+        $.ajax({
+            url: BaseUrl + '/user/getUserOnCache',
             type: 'get',
             dataType: 'json',
             //解决session不共享
@@ -585,7 +585,7 @@
                     }
                 });
             }
-        }))
+        })
     })
 </script>
 </body>

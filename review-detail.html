@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>校园活动管理系统</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+    <link rel="stylesheet" href="modules/css/all.min.css">
+    <link rel="stylesheet" href="modules/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="modules/css/selectric.css">
+    <link rel="stylesheet" href="modules/css/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="modules/css/style.css">
+    <link rel="stylesheet" href="modules/css/components.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA --></head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+        <!--Nav :-->
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+                    </li>
+                </ul>
+
+            </form>
+            <!-- 右上角 -->
+            <ul class="navbar-nav navbar-right">
+                <!-- 头像部分 -->
+                <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                </a>
+                    <!-- 弹框 -->
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <!--上次登录时间-->
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-calendar"></i> 个人中心
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item has-icon">
+                            <i class="fas fa-sign-out-alt"></i>退出系统
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!--: Nav -->
+
+        <!--Sidebar:-->
+        <div class="main-sidebar sidebar-style-2">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index.html">
+                        <small>校内活动管理系统</small>
+                    </a>
+                </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="index.html">CAMS</a>
+                </div>
+                <ul class="sidebar-menu" id="menu">
+
+                    <li class="menu-header">Dashboard</li>
+                    <li class="">
+                        <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+                    </li>
+
+                    <li class="menu-header">Person Center</li>
+
+                    <li class="">
+                        <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+                    </li>
+
+
+                    <li class="menu-header">Activity Center</li>
+                    <li class="">
+                        <a class="nav-link" href="activity-center.html"><i
+                                class="fab fa-centercode"></i><span>活动中心</span></a>
+                    </li>
+                    <li class="active">
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                    </li>
+
+                    <li class="menu-header">System Management</li>
+                    <li class="">
+                        <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="place-center.html"><i
+                                class="fas fa-map-signs"></i><span>资源管理</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <!--:Sidebar-->
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+
+                <div class="section-header">
+                    <div class="section-header-back">
+                        <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <h1>表单详情</h1>
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
+                        <div class="breadcrumb-item active"><a href="review-center.html">审批中心</a></div>
+                        <div class="breadcrumb-item">表单详情</div>
+                    </div>
+                </div>
+
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card author-box card-primary">
+                                <div class="card-body">
+                                    <div class="author-box-left">
+                                        <img alt="image" src="modules/img/avatar/avatar-1.png"
+                                             class="rounded-circle author-box-picture">
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="author-box-details">
+                                        <div class="author-box-name">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <a href="javascript:void(0);"><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;">标题:</font></font></a>
+                                                    <strong id="activityTitle"></strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="javascript:void(0);"><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;">时间:</font></font></a>
+                                                    <strong id="startDate"></strong> - <strong
+                                                        id="endDate"></strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="javascript:void(0);"><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;">人数:</font></font></a>
+                                                    <strong id="attendance"></strong>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="javascript:void(0);"><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;">状态:</font></font></a>
+                                                    <strong id="verifyStatus"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span id="formId" style="display: none"></span>
+                                        <span id="userId" style="display: none"></span>
+                                        <!--<div class="author-box-job" id="formId" style="display: none"></div>-->
+                                        <!--<div class="author-box-job" id="userId" style="display: none"></div>-->
+                                        <div class="author-box-description">
+                                            <p id="activityContent">
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="w-100 d-sm-none"></div>
+                                    <div class="float-right mt-sm-0 mt-3">
+                                        <a href="javascript:void(0);" class="btn">提交于
+                                            <strong id="createTime"></strong>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card author-box card-primary">
+                            <div class="card-header">
+                                <h4>Write</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="verifyForm" method="post" class="needs-validation" novalidate=""
+                                      onsubmit="return false;">
+                                    <!--<div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">邮件标题</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>-->
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                            <small>选择审核状态</small>
+                                        </label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select name="verifyStatus" class="form-control selectric">
+                                                <option value="1">通过</option>
+                                                <option value="2">未通过</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                            <small>邮件内容</small>
+                                        </label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea id="mailMsg" class="summernote-simple"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button id="commit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </div>
+    <footer class="main-footer">
+        <div class="footer-left">
+            Copyright &copy; 2018
+            <div class="bullet"></div>
+            Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+        </div>
+        <div class="footer-right">
+            Copyright &copy; 校园活动管理系统 2019
+        </div>
+    </footer>
+</div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="modules/js/jquery.min.js"></script>
+<script src="modules/js/popper.js"></script>
+<script src="modules/js/tooltip.js"></script>
+<script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/jquery.nicescroll.min.js"></script>
+<script src="modules/js/moment.min.js"></script>
+<script src="modules/js/stisla.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
+<script src="modules/summernote/summernote-bs4.js"></script>
+<script src="modules/js/jquery.selectric.min.js"></script>
+<script src="modules/js/jquery.uploadPreview.min.js"></script>
+<script src="modules/js/bootstrap-tagsinput.min.js"></script>
+<script src="modules/js/features-post-create.js"></script>
+<script src="modules/js/scripts.js"></script>
+<script src="modules/js/custom.js"></script>
+<script type="text/javascript">
+    $(function () {
+        navInfo();
+        $.ajax({
+            url: BaseUrl + '/application/getDetailOnCache',
+            type: 'get',
+            dataType: 'json',
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    if (key == "verifyStatus"){
+                        $("#"+key).html(verifyTag(val));
+                    } else {
+                        $('#' + key).html(val);
+                    }
+                });
+            }
+        })
+
+        //
+        $('#verifyForm').submit(function () { //当提交表单时，会发生 submit 事件。
+            debugger;
+            //Get
+            var formId = $("#formId").text();
+            var userId = $("#userId").text();
+            var verifyStatus = $("select[name='verifyStatus']").val();
+            var mailMsg = $("#mailMsg").val();
+
+            //Json
+            var ajaxdata = {
+                "formId": formId,
+                "userId":userId,
+                "mailMsg":mailMsg,
+                "verifyStatus":verifyStatus
+            };
+            //Ajax
+            $.ajax({
+                type: "POST",
+                url: BaseUrl + '/application/verifyFormById',
+                data: ajaxdata,
+                beforeSend: function () {
+                    $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                    $("#btn-submit").val("正在提交...");
+                },
+                crossDomain: true,
+                xhrFields: {withCredentials: true},
+                success: function (data) {
+                    if (data == "SUCCESS") {
+                        swal({
+                            title: "提交成功",
+                            icon: "success"
+                        }).then((willTrue)=>{
+                            window.location.href="review-center.html";
+                        })
+                    } else{
+                        swal("提交失败",{icon:"error"});
+                    }
+                },
+                error: function (data) {
+                    switch (data) {
+                        case 404:
+                            swal({
+                                title: "找不到您要查找的页面",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+                        case 500:
+                            swal({
+                                title: "服务器出了点小问题",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+                    }
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

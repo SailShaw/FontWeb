@@ -224,118 +224,23 @@
     </div>
 </div>
 
-<!-- EditModal: -->
-<div id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="EditModalLabel" class="modal-title">编辑申请表 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <form id="modal_edit">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>用户ID</label>
-                                <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                            <div class="col-md-6">
-                                <label>注册信息</label>
-                                <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="roleId" class="form-control">
-                                    <option name="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="groupId" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="commitUpdate" type="button" class="btn btn-primary">提交</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- :EditModal -->
-
-<!-- Del Modal: -->
-<!--<div id="delModal" tabindex="-1" role="dialog" aria-labelledby="DelModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="DelModalLabel" class="modal-title">用户管理 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="modal_del">
-                    <div class="form-group">
-                        <label>用户ID</label>
-                        <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>注册信息</label>
-                        <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="a" class="form-control">
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="aa" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="commitUpdate()" class="btn btn-primary">提交</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- :Del Modal -->
 
 <!-- General JS Scripts -->
-<script src="modules/jquery/jquery.min.js"></script>
-<script src="modules/custom/js/popper.js"></script>
-<script src="modules/bootstrap/js/bootstrap-table.js"></script>
-<script src="modules/custom/js/tooltip.js"></script>
-<script src="modules/bootstrap/js/bootstrap.min.js"></script>
-<script src="modules/nicescroll/jquery.nicescroll.min.js"></script>
-<script src="modules/custom/js/moment.min.js"></script>
-<script src="modules/bootstrap/js/bootstrapValidator.js"></script>
-<script src="modules/custom/js/stisla.js"></script>
-
+<script src="modules/js/jquery.min.js"></script>
+<script src="modules/js/popper.js"></script>
+<script src="modules/js/tooltip.js"></script>
+<script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/jquery.nicescroll.min.js"></script>
+<script src="modules/js/moment.min.js"></script>
+<script src="modules/js/bootstrapValidator.js"></script>
+<script src="modules/js/stisla.js"></script>
 <!-- JS Libraies -->
-
+<script src="modules/js/sweetalert.min.js"></script>
 <!-- Page Specific JS File -->
-<script src="modules/noties/js/notyf.min.js"></script>
+<script src="modules/js/notyf.min.js"></script>
 <!-- Template JS File -->
-<script src="modules/custom/js/scripts.js"></script>
-<script src="modules/custom/js/custom.js"></script>
+<script src="modules/js/scripts.js"></script>
+<script src="modules/js/custom.js"></script>
 <script type="text/javascript">
     var Json = {"roleId": "roleId", "groupId": "groupId"};
     var i = $("#currentNum").text();
@@ -378,7 +283,7 @@
         //关闭模态框
         $("#editModal").modal("hide");
         $.ajax({
-            url: BaseUrl + 'user/modifyURGInfo',
+            url: BaseUrl + '/user/modifyURGInfo',
             type: "post",
             data: user,
             dataType: "text",

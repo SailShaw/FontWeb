@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -95,7 +96,8 @@
 
                     <li class="menu-header">Activity Center</li>
                     <li class="">
-                        <a class="nav-link" href="activity-center.html"><i class="fab fa-centercode"></i><span>活动中心</span></a>
+                        <a class="nav-link" href="activity-center.html"><i
+                                class="fab fa-centercode"></i><span>活动中心</span></a>
                     </li>
                     <li class="active">
                         <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
@@ -109,7 +111,8 @@
                         <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
                     </li>
                     <li class="">
-                        <a class="nav-link" href="place-center.html"><i class="fas fa-map-signs"></i><span>资源管理</span></a>
+                        <a class="nav-link" href="place-center.html"><i
+                                class="fas fa-map-signs"></i><span>资源管理</span></a>
                     </li>
                     <li class="">
                         <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
@@ -124,7 +127,7 @@
             <section class="section">
                 <!-- Page Header -->
                 <div class="section-header">
-                    <h1>用户管理:
+                    <h1>审核中心:
                         <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
                     </h1>
                 </div>
@@ -138,23 +141,23 @@
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-striped table-md">
                                             <thead>
-                                            <!--<td><div class="badge badge-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">活性</font></font></div></td>-->
-                                            <!--<td><a href="#" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">详情</font></font></a></td>-->
                                             <tr>
                                                 <th><font style="vertical-align: inherit;"><font
                                                         style="vertical-align: inherit;">ID</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">中文姓名</font></font></th>
+                                                        style="vertical-align: inherit;">申请人</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">角色名称</font></font></th>
+                                                        style="vertical-align: inherit;">活动标题</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">部门名称</font></font></th>
+                                                        style="vertical-align: inherit;">开始日期</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册日期</font></font></th>
+                                                        style="vertical-align: inherit;">结束日期</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">当前状态</font></font></th>
+                                                        style="vertical-align: inherit;">审批状态</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册时提供的部门描述</font></font></th>
+                                                        style="vertical-align: inherit;">审批人</font></font></th>
+                                                <th><font style="vertical-align: inherit;"><font
+                                                        style="vertical-align: inherit;">表单状态</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
                                                         style="vertical-align: inherit;">操作</font></font></th>
                                             </tr>
@@ -224,181 +227,23 @@
     </div>
 </div>
 
-<!-- EditModal: -->
-<div id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="EditModalLabel" class="modal-title">编辑申请表 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <form id="modal_edit">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>用户ID</label>
-                                <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                            <div class="col-md-6">
-                                <label>注册信息</label>
-                                <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="roleId" class="form-control">
-                                    <option name="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="groupId" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="commitUpdate" type="button" class="btn btn-primary">提交</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- :EditModal -->
-
-<!-- Del Modal: -->
-<!--<div id="delModal" tabindex="-1" role="dialog" aria-labelledby="DelModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="DelModalLabel" class="modal-title">用户管理 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="modal_del">
-                    <div class="form-group">
-                        <label>用户ID</label>
-                        <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>注册信息</label>
-                        <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="a" class="form-control">
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="aa" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="commitUpdate()" class="btn btn-primary">提交</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- :Del Modal -->
-
 <!-- General JS Scripts -->
-<script src="modules/jquery/jquery.min.js"></script>
-<script src="modules/custom/js/popper.js"></script>
-<script src="modules/bootstrap/js/bootstrap-table.js"></script>
-<script src="modules/custom/js/tooltip.js"></script>
-<script src="modules/bootstrap/js/bootstrap.min.js"></script>
-<script src="modules/nicescroll/jquery.nicescroll.min.js"></script>
-<script src="modules/custom/js/moment.min.js"></script>
-<script src="modules/bootstrap/js/bootstrapValidator.js"></script>
-<script src="modules/custom/js/stisla.js"></script>
-
-<!-- JS Libraies -->
-
-<!-- Page Specific JS File -->
-<script src="modules/noties/js/notyf.min.js"></script>
-<!-- Template JS File -->
-<script src="modules/custom/js/scripts.js"></script>
-<script src="modules/custom/js/custom.js"></script>
+<script src="modules/js/jquery.min.js"></script>
+<script src="modules/js/popper.js"></script>
+<script src="modules/js/tooltip.js"></script>
+<script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/jquery.nicescroll.min.js"></script>
+<script src="modules/js/moment.min.js"></script>
+<script src="modules/js/bootstrapValidator.js"></script>
+<script src="modules/js/stisla.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
+<script src="modules/js/scripts.js"></script>
+<script src="modules/js/custom.js"></script>
 <script type="text/javascript">
-    var Json = {"roleId": "roleId", "groupId": "groupId"};
     var i = $("#currentNum").text();
-    var form =$('#modal_edit');
-    $(document).ready(function () {
-        form.bootstrapValidator({
-            message: '请输入内容',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                roleId: {
-                    validators: {
-                        notEmpty: {
-                            message: '角色不能为空'
-                        }
-                    }
-                },
-                groupId: {
-                    validators: {
-                        notEmpty: {
-                            message: '部门不能为空'
-                        }
-                    }
-                }
-            }
-
-        });
-    });
-    $("#commitUpdate").click(function () {
-        /* 通过name选择元素
-         * $('[name="startTime"]','#modal_edit').val()
-         */
-        var userId = $('input[name="userId"]', '#modal_edit').val();
-        var roleId = $('input[name="appTitle"]', '#modal_edit').val();
-        var groupId = $('input[name="startTime"]', '#modal_edit').val();
-        var user={"userId":userId,"roleId":roleId,"groupId":groupId};
-        //关闭模态框
-        $("#editModal").modal("hide");
-        $.ajax({
-            url: BaseUrl + 'user/modifyURGInfo',
-            type: "post",
-            data: user,
-            dataType: "text",
-            success: function (data) {
-                if (data == 'success') {
-                    noties.confirm("修改成功,表格数据将会自动刷新");
-                    refreshDataTables(i);
-
-                } else if (data == 'error') {
-                    noties.alertt == ("修改失败");
-                    refreshDataTables(i);
-                }
-            }
-        });
-    });
-
-
     $(function () {
         //初始化
-        pageInfoInit(Json);
+        navInfo();
         refreshDataTables(1);
     })
 
@@ -430,18 +275,17 @@
         for (i in JsonData.result) {
             var tr;
             tr =
-                '<td data-tag="userId">' + JsonData.result[i].userId + '</td>' +
-                '<td data-tag="roleId" style="display:none;">' + JsonData.result[i].roleId + '</td>' +
-                '<td data-tag="groupId" style="display:none;">' + JsonData.result[i].groupId + '</td>' +
+                '<td data-tag="formId">' + JsonData.result[i].formId + '</td>' +
                 '<td data-tag="znName">' + JsonData.result[i].znName + '</td>' +
-                '<td data-tag="roleName">' + identityTag(JsonData.result[i].roleName) + '</td>' +
-                '<td data-tag="groupName">' + identityTag(JsonData.result[i].groupName) + '</td>' +
-                '<td data-tag="createTime">' + JsonData.result[i].createTime + '</td>' +
-                '<td data-tag="isEff">' + isEffTag(JsonData.result[i].isEff) + '</td>' +
-                '<td data-tag="groupDesc">' + JsonData.result[i].groupDesc + '</td>' +
+                '<td data-tag="activityTitle">' + JsonData.result[i].activityTitle + '</td>' +
+                '<td data-tag="startDate">' + JsonData.result[i].startDate + '</td>' +
+                '<td data-tag="endDate">' + JsonData.result[i].endDate + '</td>' +
+                '<td data-tag="verifyStatus">' + verifyTag(JsonData.result[i].verifyStatus) + '</td>' +
+                '<td data-tag="reviewer">' + JsonData.result[i].reviewer+ '</td>' +
+                '<td data-tag="isOff">' + offTag(JsonData.result[i].isOff) + '</td>' +
                 '<td>' +
-                '<button type="button" onclick="editThis(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
-                '<button type="button" onclick="delUser(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
+                '<button type="button" onclick="verifyForm(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
+                '<button type="button" onclick="delForm(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
                 '</td>'
             $("#dataTable").append('<tr>' + tr + '</tr>')
         }
@@ -467,39 +311,77 @@
             pageNum = $("#currentNum").text();
         }
         $.ajax({
-            url: BaseUrl + 'user/getURGInfoListByPage',
+            url: BaseUrl + '/application/getFormListByDept',
             type: 'get',
             dataType: 'json',
             data: {
                 pageNum: pageNum || 1,
-                // pageSize: pagesize || 7
             },
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
             success: function (data) {
                 renderTable(data);
             }
         })
     }
 
-    /**
-     * 编辑模态框
-     */
-    function editThis(btn) {
-        //显示模态框
-        $("#editModal").modal('show');
-        //寻找此按钮附近最近的tr标签
-        var currnet_row = $(btn).parents('tr');
-        //Json
-        var Json = {};
-        //获取指定内容
-        Json.userId = currnet_row.find("td[data-tag='userId']").html();
-        Json.groupDesc = currnet_row.find("td[data-tag='groupDesc']").html();
-        Json.roleId = currnet_row.find("td[data-tag='roleId']").html();
-        Json.groupId = currnet_row.find("td[data-tag='groupId']").html();
-        //修改输入框默认值
-        $.each(Json, function (key, val) {
-            $("#modal_edit").find("input[name='" + key + "']").val(val);
-            $("#modal_edit").find("select[name='" + key + "']").val(val);
-        });
+    function verifyForm(btn) {
+        var formId = $(btn).parents('tr').find("td[data-tag='formId']").html();
+        var ajaxData = {"formId":formId};
+        $.ajax({
+            url: BaseUrl + '/application/getDetailToCache',
+            data: ajaxData,
+            type: 'post',
+            dataType: 'text',
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                if (data == 'SUCCESS'){
+                    window.location.href="review-detail.html";
+                }else if(data == 'JSON_IS_NULL'){
+                    swal("Sorry","数据获取异常","warning")
+                }
+            },
+            error: function (data) {
+                switch (data.status) {
+                    case 404:
+                        swal("Oops","服务器出了点小问题","error");
+                    case 500:
+                        swal("Oops","服务器出了点小问题","error");
+                }
+            }
+        })
+    }
+
+    //删除
+    function delForm(btn) {
+        debugger;
+        var formId = $(btn).parents('tr').find("td[data-tag='formId']").html();
+        var activityTitle = $(btn).parents('tr').find("td[data-tag='activityTitle']").html();
+        var ajaxData = {"formId":formId};
+        swal({
+            title: '确定删除"'+activityTitle+'"吗?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete)=>{
+            if (willDelete){
+                $.ajax({
+                    url: BaseUrl + '/application/deleteFormById',
+                    data: ajaxData,
+                    type: 'post',
+                    dataType: 'text',
+                    success: function (data) {
+                        if (data == 'SUCCESS'){
+                            swal("该用户已被删除",{icon:"success"});
+                            refreshDataTables(i);
+                        }
+                    }
+                })
+            }
+        })
     }
 
 

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Forms &rsaquo; Editor &mdash; Stisla</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="modules/css/bootstrap.min.css">
+  <link rel="stylesheet" href="modules/css/all.min.css">
+  <link rel="stylesheet" href="modules/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="modules/css/codemirror.css">
+  <link rel="stylesheet" href="modules/css/duotone-dark.css">
+  <link rel="stylesheet" href="modules/css/selectric.css">
+  <link rel="stylesheet" href="modules/css/style.css">
+  <link rel="stylesheet" href="modules/css/components.css">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <!--Nav :-->
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a>
+            </li>
+          </ul>
+
+        </form>
+        <!-- 右上角 -->
+        <ul class="navbar-nav navbar-right">
+          <!-- 头像部分 -->
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+                                  class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
+          </a>
+            <!-- 弹框 -->
+            <div class="dropdown-menu dropdown-menu-right">
+              <!--上次登录时间-->
+              <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="personal-center.html" class="dropdown-item has-icon">
+                <i class="fas fa-calendar"></i> 个人中心
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0);" onclick="loginOut()" class="dropdown-item has-icon">
+                <i class="fas fa-sign-out-alt"></i>退出系统
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!--: Nav -->
+
+      <!--Sidebar:-->
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html">
+              <small>校内活动管理系统</small>
+            </a>
+          </div>
+          <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">CAMS</a>
+          </div>
+          <ul class="sidebar-menu" id="menu">
+
+            <li class="menu-header">Dashboard</li>
+            <li class="">
+              <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+            </li>
+
+            <li class="menu-header">Person Center</li>
+
+            <li class="">
+              <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+            </li>
+
+
+            <li class="menu-header">Activity Center</li>
+            <li class="">
+              <a class="nav-link" href="activity-center.html"><i
+                      class="fab fa-centercode"></i><span>活动中心</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+            </li>
+
+            <li class="menu-header">System Management</li>
+            <li class="active">
+              <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="place-center.html"><i
+                      class="fas fa-map-signs"></i><span>资源管理</span></a>
+            </li>
+            <li class="">
+              <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+            </li>
+          </ul>
+        </aside>
+      </div>
+      <!--:Sidebar-->
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-header">
+            <h1>Editor</h1>
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+              <div class="breadcrumb-item"><a href="#">Forms</a></div>
+              <div class="breadcrumb-item">Editor</div>
+            </div>
+          </div>
+
+          <div class="section-body">
+            <!--<h2 class="section-title">Editor</h2>-->
+            <!--<p class="section-lead">WYSIWYG editor and code editor.</p>-->
+
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Simple Summernote</h4>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">资源</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control selectric">
+                          <option value="0">请选择</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea class="summernote-simple"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                      <div class="col-sm-12 col-md-7">
+                        <button class="btn btn-primary">Publish</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+        </div>
+        <div class="footer-right">
+          <a href="index.html">校园活动管理系统</a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="modules/js/jquery.min.js"></script>
+  <script src="modules/js/popper.js"></script>
+  <script src="modules/js/tooltip.js"></script>
+  <script src="modules/js/bootstrap.min.js"></script>
+  <script src="modules/js/jquery.nicescroll.min.js"></script>
+  <script src="modules/js/moment.min.js"></script>
+  <script src="modules/js/stisla.js"></script>
+  <script src="modules/summernote/summernote-bs4.js"></script>
+  <script src="modules/js/codemirror.js"></script>
+  <script src="modules/js/javascript.js"></script>
+  <script src="modules/js/jquery.selectric.min.js"></script>
+  <script src="modules/js/scripts.js"></script>
+  <script src="modules/js/custom.js"></script>
+</body>
+</html>
