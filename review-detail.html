@@ -46,19 +46,19 @@
                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
                 </a>
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="personal-center.html" class="dropdown-item has-icon">
                             <i class="fas fa-calendar"></i> 个人中心
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="javascript:void(0);" onclick="loginOut()" class="dropdown-item has-icon">
                             <i class="fas fa-sign-out-alt"></i>退出系统
                         </a>
                     </div>
@@ -126,7 +126,7 @@
 
                 <div class="section-header">
                     <div class="section-header-back">
-                        <a href="features-posts.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                        <a href="review-center.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                     </div>
                     <h1>表单详情</h1>
                     <div class="section-header-breadcrumb">
@@ -240,8 +240,8 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-        </section>
     </div>
     <footer class="main-footer">
         <div class="footer-left">

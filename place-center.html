@@ -47,19 +47,19 @@
                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
                 </a>
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="personal-center.html" class="dropdown-item has-icon">
                             <i class="fas fa-calendar"></i> 个人中心
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="javascript:void(0);" onclick="loginOut()" class="dropdown-item has-icon">
                             <i class="fas fa-sign-out-alt"></i>退出系统
                         </a>
                     </div>
@@ -223,101 +223,6 @@
         </footer>
     </div>
 </div>
-
-<!-- EditModal: -->
-<div id="editModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="EditModalLabel" class="modal-title">编辑申请表 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <form id="modal_edit">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>用户ID</label>
-                                <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                            <div class="col-md-6">
-                                <label>注册信息</label>
-                                <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="roleId" class="form-control">
-                                    <option name="">请选择</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="groupId" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="commitUpdate" type="button" class="btn btn-primary">提交</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- :EditModal -->
-
-<!-- Del Modal: -->
-<!--<div id="delModal" tabindex="-1" role="dialog" aria-labelledby="DelModalLabel" aria-hidden="true"
-     class="modal fade text-left" style="margin-top:10%;">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 id="DelModalLabel" class="modal-title">用户管理 </h5>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                        aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="modal_del">
-                    <div class="form-group">
-                        <label>用户ID</label>
-                        <input name="userId" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>注册信息</label>
-                        <input name="groupDesc" type="text" placeholder="" class="form-control" disabled>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>选择角色</label>
-                                <select name="roleId" id="a" class="form-control">
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>选择部门</label>
-                                <select name="groupId" id="aa" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="commitUpdate()" class="btn btn-primary">提交</button>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- :Del Modal -->
-
 <!-- General JS Scripts -->
 <script src="modules/js/jquery.min.js"></script>
 <script src="modules/js/popper.js"></script>
