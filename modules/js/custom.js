@@ -55,6 +55,7 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
+                debugger;
                 if (data == 'SUCCESS') {
                     window.location.href = "auth-login.html";
                 }
@@ -212,9 +213,6 @@
                 $("#"+key).attr("disabled", false);
             })
         }
-    }
-    root.chartFunc = function (tagName,xData,yData) {
-
     }
 
 

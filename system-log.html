@@ -47,12 +47,12 @@
                 <li class="dropdown"><a href="#" data-toggle="dropdown"
                                         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <img alt="image" src="modules/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="znName"></span></div>
+                    <div class="d-sm-none d-lg-inline-block">Hi,<span id="current_znName"></span></div>
                 </a>
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item has-icon">
@@ -124,8 +124,8 @@
             <section class="section">
                 <!-- Page Header -->
                 <div class="section-header">
-                    <h1>用户管理:
-                        <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
+                    <h1>系统日志:
+                        <small>记录系统中每一个用户调用接口时留下的的痕迹。</small>
                     </h1>
                 </div>
                 <!-- Page Body -->
@@ -142,21 +142,17 @@
                                             <!--<td><a href="#" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">详情</font></font></a></td>-->
                                             <tr>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">ID</font></font></th>
+                                                        style="vertical-align: inherit;">日志编号</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">中文姓名</font></font></th>
+                                                        style="vertical-align: inherit;">姓名</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">角色名称</font></font></th>
+                                                        style="vertical-align: inherit;">IP地址</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">部门名称</font></font></th>
+                                                        style="vertical-align: inherit;">请求接口</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册日期</font></font></th>
+                                                        style="vertical-align: inherit;">方法描述</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">当前状态</font></font></th>
-                                                <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册时提供的部门描述</font></font></th>
-                                                <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">操作</font></font></th>
+                                                        style="vertical-align: inherit;">记录日期</font></font></th>
                                             </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -242,68 +238,9 @@
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
-    var Json = {"roleId": "roleId", "groupId": "groupId"};
     var i = $("#currentNum").text();
-    var form =$('#modal_edit');
-    $(document).ready(function () {
-        form.bootstrapValidator({
-            message: '请输入内容',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                roleId: {
-                    validators: {
-                        notEmpty: {
-                            message: '角色不能为空'
-                        }
-                    }
-                },
-                groupId: {
-                    validators: {
-                        notEmpty: {
-                            message: '部门不能为空'
-                        }
-                    }
-                }
-            }
-
-        });
-    });
-    $("#commitUpdate").click(function () {
-        /* 通过name选择元素
-         * $('[name="startTime"]','#modal_edit').val()
-         */
-        var userId = $('input[name="userId"]', '#modal_edit').val();
-        var roleId = $('input[name="appTitle"]', '#modal_edit').val();
-        var groupId = $('input[name="startTime"]', '#modal_edit').val();
-        var user={"userId":userId,"roleId":roleId,"groupId":groupId};
-        //关闭模态框
-        $("#editModal").modal("hide");
-        $.ajax({
-            url: BaseUrl + '/user/modifyURGInfo',
-            type: "post",
-            data: user,
-            dataType: "text",
-            success: function (data) {
-                if (data == 'success') {
-                    noties.confirm("修改成功,表格数据将会自动刷新");
-                    refreshDataTables(i);
-
-                } else if (data == 'error') {
-                    noties.alertt == ("修改失败");
-                    refreshDataTables(i);
-                }
-            }
-        });
-    });
-
-
     $(function () {
         //初始化
-        pageInfoInit(Json);
         refreshDataTables(1);
     })
 
@@ -335,19 +272,12 @@
         for (i in JsonData.result) {
             var tr;
             tr =
-                '<td data-tag="userId">' + JsonData.result[i].userId + '</td>' +
-                '<td data-tag="roleId" style="display:none;">' + JsonData.result[i].roleId + '</td>' +
-                '<td data-tag="groupId" style="display:none;">' + JsonData.result[i].groupId + '</td>' +
-                '<td data-tag="znName">' + JsonData.result[i].znName + '</td>' +
-                '<td data-tag="roleName">' + identityTag(JsonData.result[i].roleName) + '</td>' +
-                '<td data-tag="groupName">' + identityTag(JsonData.result[i].groupName) + '</td>' +
-                '<td data-tag="createTime">' + JsonData.result[i].createTime + '</td>' +
-                '<td data-tag="isEff">' + isEffTag(JsonData.result[i].isEff) + '</td>' +
-                '<td data-tag="groupDesc">' + JsonData.result[i].groupDesc + '</td>' +
-                '<td>' +
-                '<button type="button" onclick="editThis(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
-                '<button type="button" onclick="delUser(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
-                '</td>'
+                '<td data-tag="userId">' + JsonData.result[i].logId + '</td>' +
+                '<td data-tag="roleId">' + JsonData.result[i].userName + '</td>' +
+                '<td data-tag="groupId">' + modifyColor(JsonData.result[i].userIp,"primary") + '</td>' +
+                '<td data-tag="znName">' + JsonData.result[i].requestMethod + '</td>' +
+                '<td data-tag="roleName">' + modifyColor(JsonData.result[i].requestDesc,"primary") + '</td>' +
+                '<td data-tag="groupName">' + JsonData.result[i].createTime + '</td>' +
             $("#dataTable").append('<tr>' + tr + '</tr>')
         }
         //首尾页判断
@@ -372,42 +302,17 @@
             pageNum = $("#currentNum").text();
         }
         $.ajax({
-            url: BaseUrl + 'user/getURGInfoListByPage',
+            url: BaseUrl + '/system/getSysLogListByPage',
             type: 'get',
             dataType: 'json',
             data: {
                 pageNum: pageNum || 1,
-                // pageSize: pagesize || 7
             },
             success: function (data) {
                 renderTable(data);
             }
         })
     }
-
-    /**
-     * 编辑模态框
-     */
-    function editThis(btn) {
-        //显示模态框
-        $("#editModal").modal('show');
-        //寻找此按钮附近最近的tr标签
-        var currnet_row = $(btn).parents('tr');
-        //Json
-        var Json = {};
-        //获取指定内容
-        Json.userId = currnet_row.find("td[data-tag='userId']").html();
-        Json.groupDesc = currnet_row.find("td[data-tag='groupDesc']").html();
-        Json.roleId = currnet_row.find("td[data-tag='roleId']").html();
-        Json.groupId = currnet_row.find("td[data-tag='groupId']").html();
-        //修改输入框默认值
-        $.each(Json, function (key, val) {
-            $("#modal_edit").find("input[name='" + key + "']").val(val);
-            $("#modal_edit").find("select[name='" + key + "']").val(val);
-        });
-    }
-
-
 </script>
 </body>
 </html>
