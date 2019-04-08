@@ -18,9 +18,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-94034622-3');
@@ -51,7 +53,8 @@
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span
+                                id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="personal-center.html" class="dropdown-item has-icon">
@@ -67,223 +70,107 @@
         </nav>
         <!--: Nav -->
 
+        <!--Sidebar:-->
         <div class="main-sidebar sidebar-style-2">
             <aside id="sidebar-wrapper">
                 <div class="sidebar-brand">
-                    <a href="index.html">Stisla</a>
-                </div>
-                <div class="sidebar-brand sidebar-brand-sm">
-                    <a href="index.html">St</a>
-                </div>
-                <ul class="sidebar-menu">
-                    <li class="menu-header">Dashboard</li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-                            <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-header">Starter</li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                            <span>Layout</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                            <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                            <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
-                            <li><a class="nav-link" href="bootstrap-badge.html">Badge</a></li>
-                            <li><a class="nav-link" href="bootstrap-breadcrumb.html">Breadcrumb</a></li>
-                            <li><a class="nav-link" href="bootstrap-buttons.html">Buttons</a></li>
-                            <li><a class="nav-link" href="bootstrap-card.html">Card</a></li>
-                            <li><a class="nav-link" href="bootstrap-carousel.html">Carousel</a></li>
-                            <li><a class="nav-link" href="bootstrap-collapse.html">Collapse</a></li>
-                            <li><a class="nav-link" href="bootstrap-dropdown.html">Dropdown</a></li>
-                            <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
-                            <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
-                            <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-                            <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
-                            <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
-                            <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
-                            <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
-                            <li><a class="nav-link" href="bootstrap-popover.html">Popover</a></li>
-                            <li><a class="nav-link" href="bootstrap-progress.html">Progress</a></li>
-                            <li><a class="nav-link" href="bootstrap-table.html">Table</a></li>
-                            <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
-                            <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-header">Stisla</li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
-                            <span>Components</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="components-article.html">Article</a></li>
-                            <li><a class="nav-link beep beep-sidebar" href="components-avatar.html">Avatar</a></li>
-                            <li><a class="nav-link" href="components-chat-box.html">Chat Box</a></li>
-                            <li><a class="nav-link beep beep-sidebar" href="components-empty-state.html">Empty State</a>
-                            </li>
-                            <li><a class="nav-link" href="components-gallery.html">Gallery</a></li>
-                            <li><a class="nav-link beep beep-sidebar" href="components-hero.html">Hero</a></li>
-                            <li><a class="nav-link" href="components-multiple-upload.html">Multiple Upload</a></li>
-                            <li><a class="nav-link beep beep-sidebar" href="components-pricing.html">Pricing</a></li>
-                            <li><a class="nav-link" href="components-statistic.html">Statistic</a></li>
-                            <li><a class="nav-link" href="components-tab.html">Tab</a></li>
-                            <li><a class="nav-link" href="components-table.html">Table</a></li>
-                            <li><a class="nav-link" href="components-user.html">User</a></li>
-                            <li><a class="nav-link beep beep-sidebar" href="components-wizard.html">Wizard</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown active">
-                        <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Forms</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="forms-advanced-form.html">Advanced Form</a></li>
-                            <li class=active><a class="nav-link" href="forms-editor.html">Editor</a></li>
-                            <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-map-marker-alt"></i> <span>Google Maps</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gmaps-advanced-route.html">Advanced Route</a></li>
-                            <li><a href="gmaps-draggable-marker.html">Draggable Marker</a></li>
-                            <li><a href="gmaps-geocoding.html">Geocoding</a></li>
-                            <li><a href="gmaps-geolocation.html">Geolocation</a></li>
-                            <li><a href="gmaps-marker.html">Marker</a></li>
-                            <li><a href="gmaps-multiple-marker.html">Multiple Marker</a></li>
-                            <li><a href="gmaps-route.html">Route</a></li>
-                            <li><a href="gmaps-simple.html">Simple</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-plug"></i> <span>Modules</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="modules-calendar.html">Calendar</a></li>
-                            <li><a class="nav-link" href="modules-chartjs.html">ChartJS</a></li>
-                            <li><a class="nav-link" href="modules-datatables.html">DataTables</a></li>
-                            <li><a class="nav-link" href="modules-flag.html">Flag</a></li>
-                            <li><a class="nav-link" href="modules-font-awesome.html">Font Awesome</a></li>
-                            <li><a class="nav-link" href="modules-ion-icons.html">Ion Icons</a></li>
-                            <li><a class="nav-link" href="modules-owl-carousel.html">Owl Carousel</a></li>
-                            <li><a class="nav-link" href="modules-sparkline.html">Sparkline</a></li>
-                            <li><a class="nav-link" href="modules-sweet-alert.html">Sweet Alert</a></li>
-                            <li><a class="nav-link" href="modules-toastr.html">Toastr</a></li>
-                            <li><a class="nav-link" href="modules-vector-map.html">Vector Map</a></li>
-                            <li><a class="nav-link" href="modules-weather-icon.html">Weather Icon</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-header">Pages</li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Auth</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="auth-forgot-password.html">Forgot Password</a></li>
-                            <li><a href="auth-login.html">Login</a></li>
-                            <li><a href="auth-register.html">Register</a></li>
-                            <li><a href="auth-reset-password.html">Reset Password</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-exclamation"></i> <span>Errors</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="errors-503.html">503</a></li>
-                            <li><a class="nav-link" href="errors-403.html">403</a></li>
-                            <li><a class="nav-link" href="errors-404.html">404</a></li>
-                            <li><a class="nav-link" href="errors-500.html">500</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-bicycle"></i>
-                            <span>Features</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="features-activities.html">Activities</a></li>
-                            <li><a class="nav-link" href="features-post-create.html">Post Create</a></li>
-                            <li><a class="nav-link" href="features-posts.html">Posts</a></li>
-                            <li><a class="nav-link" href="features-profile.html">Profile</a></li>
-                            <li><a class="nav-link" href="features-settings.html">Settings</a></li>
-                            <li><a class="nav-link" href="features-setting-detail.html">Setting Detail</a></li>
-                            <li><a class="nav-link" href="features-tickets.html">Tickets</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-ellipsis-h"></i>
-                            <span>Utilities</span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="utilities-contact.html">Contact</a></li>
-                            <li><a class="nav-link" href="utilities-invoice.html">Invoice</a></li>
-                            <li><a href="utilities-subscribe.html">Subscribe</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="nav-link" href="credits.html"><i class="fas fa-pencil-ruler"></i> <span>Credits</span></a>
-                    </li>
-                </ul>
-
-                <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-                    <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                        <i class="fas fa-rocket"></i> Documentation
+                    <a href="index.html">
+                        <small>校内活动管理系统</small>
                     </a>
                 </div>
+                <div class="sidebar-brand sidebar-brand-sm">
+                    <a href="index.html">CAMS</a>
+                </div>
+                <ul class="sidebar-menu" id="menu">
+
+                    <li class="menu-header">Dashboard</li>
+                    <li class="">
+                        <a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>首&#12288;&#12288;页</span></a>
+                    </li>
+
+                    <li class="menu-header">Person Center</li>
+
+                    <li class="">
+                        <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
+                    </li>
+
+
+                    <li class="menu-header">Activity Center</li>
+                    <li class="">
+                        <a class="nav-link" href="activity-center.html"><i
+                                class="fab fa-centercode"></i><span>活动中心</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                    </li>
+
+                    <li class="menu-header">System Management</li>
+                    <li class="">
+                        <a class="nav-link" href="users-center.html"><i class="fas fa-users"></i><span>用户管理</span></a>
+                    </li>
+                    <li class="active">
+                        <a class="nav-link" href="email-test.html"><i class="fas fa-envelope"></i><span>邮箱测试</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="place-center.html"><i
+                                class="fas fa-map-signs"></i><span>资源管理</span></a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" href="system-log.html"><i class="fas fa-tags"></i><span>系统日志</span></a>
+                    </li>
+                </ul>
             </aside>
         </div>
+        <!--:Sidebar-->
 
         <!-- Main Content -->
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Editor</h1>
+                    <h1>邮箱测试</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="#">首页</a></div>
-                        <div class="breadcrumb-item">系统管理</div>
                         <div class="breadcrumb-item">邮箱测试</div>
                     </div>
                 </div>
 
                 <div class="section-body">
-                    <h2 class="section-title">邮箱测试</h2>
-                    <p class="section-lead">当前可测试系统发信功能是否正常,收件人可填写多个邮箱地址,用逗号分隔.</p>
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Full Summernote</h4>
+                                    <h4>发信功能测试</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control">
+                                    <form id="emailForm" method="post" class="needs-validation" novalidate=""
+                                          onsubmit="return false;">
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">收件人</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input id="recipient" type="email" class="form-control">
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric">
-                                                <option>Tech</option>
-                                                <option>News</option>
-                                                <option>Political</option>
-                                            </select>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">邮件标题</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input id="mailTitle" type="text" class="form-control" >
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Content</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote"></textarea>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">邮件正文</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <textarea id="mailContent" class="summernote"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <button onclick="demo()" class="btn btn-primary">Publish</button>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <button id="commit" class="btn btn-primary">发送</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -323,7 +210,84 @@
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
 
-    swal('发送成功', '若长时间未收到邮件,请将test_cams@126.com加入到白名单中', 'success');
+    $('#emailForm').submit(function () { //当提交表单时，会发生 submit 事件。
+        //Get
+        var recipient = $("#recipient").val();
+        var mailTitle = $("#mailTitle").val();
+        var mailContent = $("#mailContent").val();
+
+        //Json
+        var ajaxdata = {
+            "recipient": recipient,
+            "mailTitle": mailTitle,
+            "mailContent": mailContent
+        };
+        //Ajax
+        $.ajax({
+            type: "POST",
+            url: BaseUrl + '/global/sendEmailOfTest',
+            data: ajaxdata,
+            beforeSend: function () {
+                if(ajaxdata.recipient == null || ajaxdata.recipient == ""){
+                    swal({
+                        title: "收件人不能为空",
+                        icon: "error"
+                    })
+                }
+                else if(ajaxdata.mailTitle == null || ajaxdata.mailTitle == ""){
+                    swal({
+                        title: "邮件标题不能为空",
+                        icon: "error"
+                    })
+                }
+                else if (ajaxdata.mailContent == null || ajaxdata.mailContent == "") {
+                    swal({
+                        title: "邮件内容不能为空",
+                        icon: "error"
+                    })
+                }
+
+
+                $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                $("#btn-submit").val("正在提交...");
+
+
+            },
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                if (data == "SUCCESS") {
+                    swal({
+                        title: "提交成功",
+                        icon: "success"
+                    }).then((willTrue) => {
+                        window.location.reload();
+                    })
+                } else {
+                    swal("提交失败", {icon: "error"});
+                }
+            },
+            error: function (data) {
+                switch (data) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue) => {
+                            window.location.reload();
+                        })
+                    case 500:
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue) => {
+                            window.location.reload();
+                        })
+                }
+            }
+        });
+    });
+
 </script>
 </body>
 </html>

@@ -235,7 +235,7 @@
                 Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
             </div>
             <div class="footer-right">
-
+                <a href="https://sailshaw.github.io/FontWeb/">校园活动管理系统</a>
             </div>
         </footer>
     </div>
@@ -263,7 +263,6 @@
     var Json = {};
     $(function () {
         navInfo();
-
         $.ajax({
             url:BaseUrl + '/global/dataStatistics',
             type: 'get',
@@ -320,7 +319,30 @@
                             xData = new Array();
                             yData = new Array();
                             for (var i in val) {
-                                xData.push(val[i].weekDay);
+                                switch (val[i].weekDay) {
+                                    case 1:
+                                        xData.push("星期一");
+                                        break;
+                                    case 2:
+                                        xData.push("星期二");
+                                        break;
+                                    case 3:
+                                        xData.push("星期三");
+                                        break;
+                                    case 4:
+                                        xData.push("星期四");
+                                        break;
+                                    case 5:
+                                        xData.push("星期五");
+                                        break;
+                                    case 6:
+                                        xData.push("星期六");
+                                        break;
+                                    default:
+                                        xData.push("星期天");
+                                        break;
+                                }
+
                                 yData.push(val[i].countNum);
                             }
                             var myChart = new Chart(ctx, {
@@ -357,7 +379,7 @@
                                                 beginAtZero: true,
                                                 stepSize: 10,
                                                 callback: function(value, index, values) {
-                                                    return '$' + value;
+                                                    return '' + value;
                                                 }
                                             }
                                         }],

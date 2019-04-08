@@ -8,10 +8,12 @@
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
-    <link rel="stylesheet" href="modules/css/notyf.min.css">
+
+    <link rel="stylesheet" href="modules/css/jqvmap.min.css">
+    <link rel="stylesheet" href="modules/css/flag-icon.min.css">
+
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -127,12 +129,22 @@
                     <h1>用户管理:
                         <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
                     </h1>
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
+                        <div class="breadcrumb-item">资源管理</div>
+                    </div>
                 </div>
                 <!-- Page Body -->
                 <div class="section-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
+                                <div class="card-header">
+                                    <h4>资源总览</h4>
+                                    <div class="card-header-action">
+                                        <button class="btn btn-primary btn-icon" id="create">新增</button>
+                                    </div>
+                                </div>
                                 <!--body-->
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
@@ -142,19 +154,19 @@
                                             <!--<td><a href="#" class="btn btn-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">详情</font></font></a></td>-->
                                             <tr>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">ID</font></font></th>
+                                                        style="vertical-align: inherit;">编号</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">中文姓名</font></font></th>
+                                                        style="vertical-align: inherit;">名称</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">角色名称</font></font></th>
+                                                        style="vertical-align: inherit;">类型</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">部门名称</font></font></th>
+                                                        style="vertical-align: inherit;">创建者</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册日期</font></font></th>
+                                                        style="vertical-align: inherit;">创建时间</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">当前状态</font></font></th>
+                                                        style="vertical-align: inherit;">更新者</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
-                                                        style="vertical-align: inherit;">注册时提供的部门描述</font></font></th>
+                                                        style="vertical-align: inherit;">更新时间</font></font></th>
                                                 <th><font style="vertical-align: inherit;"><font
                                                         style="vertical-align: inherit;">操作</font></font></th>
                                             </tr>
@@ -218,92 +230,76 @@
                 Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
             </div>
             <div class="footer-right">
-                <a href="https://nauval.in/">校园活动管理系统</a>
+                <a href="https://sailshaw.github.io/FontWeb/">校园活动管理系统</a>
             </div>
         </footer>
+    </div>
+</div>
+
+<!--Modal-->
+<div id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true"
+     class="modal fade text-left" style="margin-top:10% ">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="CeeateModalLabel" class="modal-title">编辑申请表 </h4>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                        aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="modalEdit">
+                    <div class="form-group">
+                        <label>编号</label>
+                        <input name="placeId" id="placeId" type="text" placeholder="" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>选择角色</label>
+                                <input name="placeName" id="placeName" type="text" placeholder="" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label>选择部门</label>
+                                <select name="placeType" id="placeType" class="form-control">
+                                    <option value="">请选择</option>
+                                    <option value="0">室内</option>
+                                    <option value="1">室外</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="commitUpdate()" class="btn btn-primary">提交</button>
+            </div>
+        </div>
     </div>
 </div>
 <!-- General JS Scripts -->
 <script src="modules/js/jquery.min.js"></script>
 <script src="modules/js/popper.js"></script>
 <script src="modules/js/tooltip.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/bootstrap.min.js"></script>
 <script src="modules/js/jquery.nicescroll.min.js"></script>
 <script src="modules/js/moment.min.js"></script>
-<script src="modules/js/bootstrapValidator.js"></script>
 <script src="modules/js/stisla.js"></script>
+<script src="modules/js/bootstrapValidator.js"></script>
 <script src="modules/js/notyf.min.js"></script>
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
-    var Json = {"roleId": "roleId", "groupId": "groupId"};
     var i = $("#currentNum").text();
-    var form =$('#modal_edit');
-    $(document).ready(function () {
-        form.bootstrapValidator({
-            message: '请输入内容',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                roleId: {
-                    validators: {
-                        notEmpty: {
-                            message: '角色不能为空'
-                        }
-                    }
-                },
-                groupId: {
-                    validators: {
-                        notEmpty: {
-                            message: '部门不能为空'
-                        }
-                    }
-                }
-            }
-
-        });
-    });
-    $("#commitUpdate").click(function () {
-        /* 通过name选择元素
-         * $('[name="startTime"]','#modal_edit').val()
-         */
-        var userId = $('input[name="userId"]', '#modal_edit').val();
-        var roleId = $('input[name="appTitle"]', '#modal_edit').val();
-        var groupId = $('input[name="startTime"]', '#modal_edit').val();
-        var user={"userId":userId,"roleId":roleId,"groupId":groupId};
-        //关闭模态框
-        $("#editModal").modal("hide");
-        $.ajax({
-            url: BaseUrl + 'user/modifyURGInfo',
-            type: "post",
-            data: user,
-            dataType: "text",
-            success: function (data) {
-                if (data == 'success') {
-                    noties.confirm("修改成功,表格数据将会自动刷新");
-                    refreshDataTables(i);
-
-                } else if (data == 'error') {
-                    noties.alertt == ("修改失败");
-                    refreshDataTables(i);
-                }
-            }
-        });
-    });
-
-
     $(function () {
         //初始化
-        pageInfoInit(Json);
+        navInfo();
         refreshDataTables(1);
+
+
     })
 
-    /**
-     * 翻页函数
-     */
+    //翻页
     function pageTurning(val) {
         var i = $("#currentNum").text();
         if (val == "pervious") {
@@ -315,9 +311,7 @@
         refreshDataTables(i);
     }
 
-    /**
-     * 渲染表格
-     */
+    //表格渲染
     function renderTable(JsonData) {
         // clear
         $("#dataTable").find("tbody").html("");
@@ -329,18 +323,16 @@
         for (i in JsonData.result) {
             var tr;
             tr =
-                '<td data-tag="userId">' + JsonData.result[i].userId + '</td>' +
-                '<td data-tag="roleId" style="display:none;">' + JsonData.result[i].roleId + '</td>' +
-                '<td data-tag="groupId" style="display:none;">' + JsonData.result[i].groupId + '</td>' +
-                '<td data-tag="znName">' + JsonData.result[i].znName + '</td>' +
-                '<td data-tag="roleName">' + identityTag(JsonData.result[i].roleName) + '</td>' +
-                '<td data-tag="groupName">' + identityTag(JsonData.result[i].groupName) + '</td>' +
+                '<td data-tag="placeId">' + JsonData.result[i].placeId + '</td>' +
+                '<td data-tag="placeName">' + JsonData.result[i].placeName + '</td>' +
+                '<td data-tag="placeType">' + PlaceType(JsonData.result[i].placeType) + '</td>' +
+                '<td data-tag="createBy">' + JsonData.result[i].createBy + '</td>' +
                 '<td data-tag="createTime">' + JsonData.result[i].createTime + '</td>' +
-                '<td data-tag="isEff">' + isEffTag(JsonData.result[i].isEff) + '</td>' +
-                '<td data-tag="groupDesc">' + JsonData.result[i].groupDesc + '</td>' +
+                '<td data-tag="updateBy">' + NullValueTag(JsonData.result[i].updateBy) + '</td>' +
+                '<td data-tag="updateTime">' + NullValueTag(JsonData.result[i].updateTime) + '</td>' +
                 '<td>' +
-                '<button type="button" onclick="editThis(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
-                '<button type="button" onclick="delUser(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
+                '<button type="button" onclick="editThis(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#EditModal"><i class="far fa-edit"></i></button>' +
+                '<button type="button" onclick="delThis(this)" class="btn btn-danger btn-icon"><i class="fas fa-times"></i></button>' +
                 '</td>'
             $("#dataTable").append('<tr>' + tr + '</tr>')
         }
@@ -357,51 +349,304 @@
         }
     }
 
+    //编辑模态框提交按钮函数
+    function commitUpdate() {
+        //获取指定内容
+        var placeId = $("#placeId").val();
+        var placeName = $("#placeName").val();
+        var placeType = $("#placeType").val();
+        var Json = {
+            "placeId":placeId,
+            "placeName":placeName,
+            "placeType":placeType
+        };
+        $.ajax({
+            url: BaseUrl + '/place/modifyPlace',
+            type: 'get',
+            dataType: 'text',
+            data: Json,
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            beforeSend: function () {
+                $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                $("#btn-submit").val("正在提交...");
+            },
+            success: function (data) {
+                switch (data) {
+                    case 'SUCCESS':
+                        swal({
+                            title: "提交成功",
+                            icon: "success"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                            window.location.reload();
+                        });break;
+                    default :
+                        swal({
+                            title: "请输入内容",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });break;
+                }
+            },
+            error: function (data) {
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            window.location.reload()
+                        });
+                        break;
+                    default :
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            window.location.reload();
+                        });
+                        break;
+                }
+            }
+        })
 
-    /**
-     * 刷新数据表
-     */
+    }
+
+    //刷新数据表
     function refreshDataTables(pageNum) {
         if (pageNum == null) {
             pageNum = $("#currentNum").text();
         }
         $.ajax({
-            url: BaseUrl + 'user/getURGInfoListByPage',
+            url: BaseUrl + '/place/getPlaceListByPage',
             type: 'get',
             dataType: 'json',
             data: {
                 pageNum: pageNum || 1,
-                // pageSize: pagesize || 7
             },
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
             success: function (data) {
                 renderTable(data);
+            },
+            error: function (data) {
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        })
+                    case 500:
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        })
+                }
             }
         })
     }
 
-    /**
-     * 编辑模态框
-     */
+    //编辑按钮
     function editThis(btn) {
-        //显示模态框
-        $("#editModal").modal('show');
+        $("#EditModal").modal('show');
         //寻找此按钮附近最近的tr标签
         var currnet_row = $(btn).parents('tr');
         //Json
         var Json = {};
         //获取指定内容
-        Json.userId = currnet_row.find("td[data-tag='userId']").html();
-        Json.groupDesc = currnet_row.find("td[data-tag='groupDesc']").html();
-        Json.roleId = currnet_row.find("td[data-tag='roleId']").html();
-        Json.groupId = currnet_row.find("td[data-tag='groupId']").html();
-        //修改输入框默认值
-        $.each(Json, function (key, val) {
-            $("#modal_edit").find("input[name='" + key + "']").val(val);
-            $("#modal_edit").find("select[name='" + key + "']").val(val);
-        });
+        Json.placeId = currnet_row.find("td[data-tag='placeId']").html();
+        $.ajax({
+            url: BaseUrl + '/place/findPlaceById',
+            type: 'get',
+            dataType: 'json',
+            data: Json,
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                //修改输入框默认值
+                $.each(data, function (key, val) {
+                        $("#"+key).val(val);
+                        $("#modal_edit").find("select[name='" + key + "']").val(val);
+                });
+            },
+            error: function (data) {
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                    default :
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                }
+            }
+        })
     }
 
+    //新增模态框提交按钮函数
+    function commitCreate() {
+        //获取指定内容
+        var placeName = $("#c_palceName").val();
+        var placeType = $("#c_placeType").val();
+        var Json = {
+            "placeName":placeName,
+            "placeType":placeType
+        };
+        $.ajax({
+            url: BaseUrl + '/place/createPlace',
+            type: 'get',
+            dataType: 'text',
+            data: Json,
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            beforeSend: function () {
+                $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                $("#btn-submit").val("正在提交...");
+            },
+            success: function (data) {
+                switch (data) {
+                    case 'SUCCESS':
+                        swal({
+                            title: "提交成功",
+                            icon: "success"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                            window.location.reload();
+                        });break;
+                    case 'JSON_IS_NULL':
+                        swal({
+                            title: "请输入内容",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });break;
+                }
+            },
+            error: function (data) {
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                    default :
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                }
+            }
+        })
 
+    }
+    //新增模态框设置
+    $("#create").fireModal({
+        title: '新增资源',
+        body: '<form id="modal_edit">\n' +
+            '                    <div class="form-group">\n' +
+            '                        <div class="row">\n' +
+            '                            <div class="col-md-6">\n' +
+            '                                <label>名称</label>\n' +
+            '                                <input id="c_palceName" type="text" placeholder="" class="form-control">\n' +
+            '                            </div>\n' +
+            '                            <div class="col-md-6">\n' +
+            '                                <label>类型</label>\n' +
+            '                                <select id="c_placeType" class="form-control">\n' +
+            '                                    <option value="0">室内</option>\n' +
+            '                                    <option value="1">室外</option>\n' +
+            '                                </select>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </form><button type="button" onclick="commitCreate()" class="btn btn-primary" style="float: right">提交</button>',
+        center: true
+    });
+
+    //删除
+    function delThis(btn) {
+        var placeId = $(btn).parents('tr').find("td[data-tag='placeId']").html();
+        var placeName = $(btn).parents('tr').find("td[data-tag='placeName']").html();
+        var ajaxData = {"placeId":placeId};
+        swal({
+            title: '确定删除"'+placeName+'"吗?',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete)=>{
+            if (willDelete){
+                $.ajax({
+                    url: BaseUrl + '/place/deletePlace',
+                    data: ajaxData,
+                    type: 'post',
+                    dataType: 'text',
+                    //解决session不共享
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
+                    success: function (data) {
+                        if (data == 'SUCCESS'){
+                            swal({
+                                title: "操作成功",
+                                icon: "success"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+
+                        }else {
+                            swal({
+                                title: "操作失败",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                refreshDataTables(i);
+                            })
+                        }
+                    },
+                    error: function (data) {
+                        switch (data.status) {
+                            case 404:
+                                swal({
+                                    title: "找不到您要查找的页面",
+                                    icon: "error"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                })
+                            case 500:
+                                swal({
+                                    title: "服务器出了点小问题",
+                                    icon: "error"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                })
+                        }
+                    }
+                })
+            }
+        })
+    }
 </script>
 </body>
 </html>

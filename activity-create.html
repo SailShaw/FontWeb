@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>校园活动管理系统</title>
+
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
-    <link rel="stylesheet" href="modules/css/bootstrap-social.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="modules/css/daterangepicker.css">
+    <link rel="stylesheet" href="modules/css/select2.min.css">
+    <link rel="stylesheet" href="modules/css/selectric.css">
+
+    <!-- Template CSS -->
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -87,7 +92,7 @@
 
                     <li class="menu-header">Person Center</li>
 
-                    <li class="active">
+                    <li class="">
                         <a class="nav-link" href="personal-center.html"><i class="fas fa-user"></i><span>个人中心</span></a>
                     </li>
 
@@ -97,7 +102,7 @@
                         <a class="nav-link" href="activity-center.html"><i
                                 class="fab fa-centercode"></i><span>活动中心</span></a>
                     </li>
-                    <li class="">
+                    <li class="active">
                         <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
                     </li>
 
@@ -119,105 +124,93 @@
             </aside>
         </div>
         <!--:Sidebar-->
+
         <!-- Main Content -->
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>个人中心</h1>
+                    <div class="section-header-back">
+                        <a href="activity-center.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <h1>新增表单</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
-                        <div class="breadcrumb-item">个人中心</div>
+                        <div class="breadcrumb-item active"><a href="activity-center.html">活动中心</a></div>
+                        <div class="breadcrumb-item">新增表单</div>
                     </div>
                 </div>
+
                 <div class="section-body">
-                    <h2 class="section-title">Hi, <span id="znName"></span>!</h2>
-                    <p class="section-lead">
-                        在此页面上更改有关您自己的信息。
-                    </p>
-
-                    <div class="row mt-sm-4">
-                        <div class="col-12 col-md-12 col-lg-5">
-                            <div class="card profile-widget">
-                                <div class="profile-widget-header">
-                                    <img alt="image" src="modules/img/avatar/avatar-1.png"
-                                         class="rounded-circle profile-widget-picture">
-                                    <div class="profile-widget-items">
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-label">角色</div>
-                                            <div class="profile-widget-item-value">
-                                                <small id="roleName"></small>
-                                            </div>
-                                        </div>
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-label">部门</div>
-                                            <div class="profile-widget-item-value">
-                                                <small id="groupName"></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-widget-description">
-                                    <div class="profile-widget-name section-title" style="display: none">ID:
-                                        <span id="userId"></span>
-                                    </div>
-                                    <div class="profile-widget-name section-title">电话:
-                                        <span id="telphone"></span>
-                                    </div>
-                                    <div class="profile-widget-name section-title">邮箱:
-                                        <span id="email"></span>
-                                    </div>
-
-                                    <div class="profile-widget-name section-title">备注:
-                                        <span id="groupDesc"></span>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-center" >
-                                    <div class="font-weight-bold mb-2 text-uppercase">User information card</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-12 col-lg-7">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12">
                             <div class="card">
-                                <form id="editForm" method="post" class="needs-validation" novalidate=""
-                                      onsubmit="return false;">
-                                    <div class="card-body" style="margin-top: 6.5%;">
-                                        <div class="row">
-                                            <div class="form-group col-md-6 col-12">
-                                                <label>姓名</label>
-                                                <input id="e_znName" type="text" class="form-control" required>
-                                                <div class="invalid-feedback">
-                                                    请输入姓名
+                                <div class="card-header">
+                                    <h4>编辑</h4>
+                                </div>
+
+                                <div class="card-body">
+                                    <form id="editForm" method="post" class="needs-validation" novalidate=""
+                                          onsubmit="return false;">
+                                    <div class="row">
+                                        <div class="col-2"></div>
+                                            <div class="col-8">
+
+                                                <div class="form-group mb-4">
+                                                    <label for="activityTitle">活动标题</label>
+                                                    <input type="text" class="form-control" id="activityTitle" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        请输入标题
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label>电话</label>
-                                                <input id="e_telphone" type="tel" class="form-control" required>
-                                                <div class="invalid-feedback">
-                                                    请输入电话
+
+                                                <div class="form-group form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>参与人数</label>
+                                                        <input type="text" class="form-control" id="attendance" placeholder="" required>
+                                                        <div class="invalid-feedback">
+                                                            请输入人数
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>选择资源</label>
+                                                        <select id="placeId" class="form-control" required>
+                                                        </select>
+                                                        <div class="invalid-feedback">
+                                                            请选择资源
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6 col-12">
-                                                <label>邮箱</label>
-                                                <input id="e_email" type="email" class="form-control" required>
-                                                <div class="invalid-feedback">
-                                                    请输入邮箱
+
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>开始日期</label>
+                                                        <input type="text" class="form-control datepicker" id="startDate" placeholder="" required>
+                                                        <div class="invalid-feedback">
+                                                            请选择开始日期
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label for="endDate">结束日期</label>
+                                                        <input type="text" class="form-control datepicker" id="endDate" placeholder="" required>
+                                                        <div class="invalid-feedback">
+                                                            请选择结束日期
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group col-md-6 col-12">
-                                                <label>备注</label>
-                                                <input id="e_groupDesc" type="text" class="form-control" required>
-                                                <div class="invalid-feedback">
-                                                    请输入备注
+
+                                                <div class="form-group">
+                                                    <label>活动内容</label>
+                                                    <input type="text" class="form-control" id="activityContent" placeholder="" required>
+                                                    <div class="invalid-feedback">
+                                                        请输入活动内容
+                                                    </div>
                                                 </div>
+                                                <button class="btn btn-primary" style="float: right">提交</button>
                                             </div>
-                                        </div>
+                                        <div class="col-2"></div>
                                     </div>
-                                    <div class="card-footer text-right">
-                                        <button id="btn-submit" type="submit" class="btn btn-primary">保存</button>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,7 +224,7 @@
                 Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
             </div>
             <div class="footer-right">
-                <a href="https://nauval.in/">校园活动管理系统</a>
+                Copyright &copy; 校园活动管理系统 2019
             </div>
         </footer>
     </div>
@@ -242,60 +235,62 @@
 <script src="modules/js/popper.js"></script>
 <script src="modules/js/tooltip.js"></script>
 <script src="modules/js/bootstrap.min.js"></script>
-<script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/jquery.nicescroll.min.js"></script>
 <script src="modules/js/moment.min.js"></script>
 <script src="modules/js/stisla.js"></script>
+<!-- JS Libraies -->
+<script src="modules/js/sweetalert.min.js"></script>
+<script src="modules/js/daterangepicker.js"></script>
+<script src="modules/js/select2.full.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="modules/js/forms-advanced-forms.js"></script>
+<!-- Template JS File -->
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
     $(function () {
+        //nav加载
         navInfo();
         $.ajax({
-            url: BaseUrl + '/global/getLoginUserInfo',
+            url: BaseUrl + 'application/getDetailOnCache',
             type: 'get',
             dataType: 'json',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data,function (key,val) {
-                    $("#"+key).html(val)
-                    switch (key) {
-                        case "znName":
-                            document.getElementById("e_znName").value = val;
-                            break;
-                        case "telphone":
-                            document.getElementById("e_telphone").value = val;
-                            break;
-                        case "email":
-                            document.getElementById("e_email").value = val;
-                            break;
-                        default :
-                            document.getElementById("e_groupDesc").value = val;
-                            break;
-                    }
-                })
+                //关闭状态校验
+                editStatus(data.isOff,data);
+                $.each(data, function (key, val) {
+                    $('#' + key).html(val);
+                });
             }
         });
 
+        //表单提交
         $('#editForm').submit(function () { //当提交表单时，会发生 submit 事件。
             //Get
-            var znName = $("#e_znName").val();
-            var telphone = $("#e_telphone").val();
-            var email = $("#e_email").val();
-            var groupDesc = $("#e_groupDesc").val();
+            var activityTitle = $("#activityTitle").val();
+            var attendance = $("#attendance").val();
+            var placeId = $("#placeId").val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var activityContent = $("#activityContent").val();
+            debugger;
             //Json
             var postData = {
-                "znName": znName,
-                "telphone": telphone,
-                "email": email,
-                "groupDesc": groupDesc
+                "activityTitle": activityTitle,
+                "attendance": attendance,
+                "placeId": placeId,
+                "startDate": startDate,
+                "endDate": endDate,
+                "activityContent": activityContent
             };
             //Ajax
             $.ajax({
                 type: "POST",
-                url: BaseUrl + '/user/modifyUserInfoById',
+                url: BaseUrl + 'application/modifyFormById',
                 data: postData,
                 beforeSend: function () {
                     $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
@@ -304,39 +299,39 @@
                 crossDomain: true,
                 xhrFields: {withCredentials: true},
                 success: function (data) {
-                    if (data == "SUCCESS") {
+                    if (data == 'SUCCESS'){
+                        window.location.reload();
+                    }else {
                         swal({
-                            title: "提交成功",
-                            icon: "success"
+                            title: "数据获取异常",
+                            icon: "error"
                         }).then((willTrue)=>{
-                            window.location.reload();
+                            //取消设置禁用按钮
+                            $("#btn-submit").attr("disabled", false);
                         })
-                    } else{
-                        swal("提交失败",{icon:"error"});
                     }
                 },
                 error: function (data) {
-                    debugger;
-                    switch (data.status) {
+                    switch (data) {
                         case 404:
                             swal({
                                 title: "找不到您要查找的页面",
                                 icon: "error"
                             }).then((willTrue)=>{
-                                $("#btn-submit").attr("disabled", false);
+                                refreshDataTables(i);
                             })
                         case 500:
                             swal({
                                 title: "服务器出了点小问题",
                                 icon: "error"
                             }).then((willTrue)=>{
-                                $("#btn-submit").attr("disabled", false);
+                                refreshDataTables(i);
                             })
                     }
                 }
             });
         });
-    })
+    });
 </script>
 </body>
 </html>

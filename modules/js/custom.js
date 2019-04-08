@@ -171,7 +171,7 @@
     };
 
     // 场地类型标签
-    root.setPlaceType = function (val) {
+    root.PlaceType = function (val) {
         switch (val) {
             case "1":
                 return '<strong><p class="text-primary">室外</p></strong>'
@@ -214,6 +214,82 @@
             })
         }
     }
+    root.NullValueTag = function (val) {
+        switch (val) {
+            case null:
+                return '<strong><p class="text-danger">暂无</p></strong>'
 
+            default :
+                return '<strong><p class="text-primary">'+val+'</p></strong>'
+
+
+        }
+    }
+
+    root.checkNullValue = function (data) {
+        $.each(data,function (key,val) {
+            if (val == null || val == ''){
+                swal({
+                    title: "不能为空",
+                    icon: "error"
+                })
+            }
+        })
+    }
+
+
+    /*$.ajax({
+        url: BaseUrl + '/place/createPlace',
+        type: 'get',
+        dataType: 'text',
+        data: ,
+        //解决session不共享
+        crossDomain: true,
+        xhrFields: {withCredentials: true},
+        beforeSend: function () {
+                $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击，重复提交表单
+                $("#btn-submit").val("正在提交...");
+            },
+            success: function (data) {
+                switch (data) {
+                    case 'SUCCESS':
+                        swal({
+                            title: "提交成功",
+                            icon: "success"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                            window.location.reload();
+                        });break;
+                    case 'JSON_IS_NULL':
+                        swal({
+                            title: "请输入内容",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });break;
+                }
+            },
+            error: function (data) {
+                debugger;
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                    default :
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });
+                        break;
+                }
+            }
+    })*/
 
 }(this));
