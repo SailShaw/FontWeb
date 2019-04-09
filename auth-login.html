@@ -149,6 +149,26 @@
                             });
                             break;
                     }
+                },
+                error: function (data) {
+                    switch (data.status) {
+                        case 404:
+                            swal({
+                                title: "找不到您要查找的页面",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                $("#btn-submit").attr("disabled", false);
+                            });
+                            break;
+                        default :
+                            swal({
+                                title: "服务器出了点小问题",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                $("#btn-submit").attr("disabled", false);
+                            });
+                            break;
+                    }
                 }
             });
         });
