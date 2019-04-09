@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>注册 &mdash; 校园活动管理系统</title>
+  <title>校园活动管理系统</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="modules/css/notyf.min.css">
@@ -34,7 +34,7 @@
             </div>
 
             <div class="card card-primary">
-              <div class="card-header"><h4>Register</h4></div>
+              <div class="card-header"><h4>注册</h4></div>
 
               <div class="card-body">
                 <form id="registerForm" method="POST" class="needs-validation" novalidate="" onsubmit="return false;">
@@ -71,12 +71,12 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <!--<div class="form-group">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
                       <label class="custom-control-label" for="agree">我同意条款和条件</label>
                     </div>
-                  </div>
+                  </div>-->
 
                   <div class="form-group">
                     <button id="btn-submit" type="submit" class="btn btn-primary btn-lg btn-block">
@@ -102,7 +102,7 @@
   <script src="modules/js/jquery.min.js"></script>
   <script src="modules/js/popper.js"></script>
   <script src="modules/js/tooltip.js"></script>
-  <script src="modules/js/notyf.min.js"></script>
+  <script src="modules/js/sweetalert.min.js"></script>
   <script src="modules/js/bootstrap.min.js"></script>
   <script src="modules/js/jquery.nicescroll.min.js"></script>
   <script src="modules/js/moment.min.js"></script>
@@ -139,12 +139,41 @@
             $("#btn-submit").val("正在提交...");
           },
           success: function (data) {
-            if (data == "SUCCESS") {
-              noties.confirm("注册成功,正在跳转");
-              setTimeout(window.location.href = "auth-login.html", 10000);
-            } else if (data == "USER_IS_EXIST") {
-              noties.alert("用户已存在");
-              $("#btn-submit").attr("disabled", false);
+            switch (data) {
+              case 'USER_IS_EXIST':
+                swal({
+                  title: "账号已存在，请重新输入",
+                  icon: "error"
+                }).then((willTrue)=>{
+                  $("#btn-submit").attr("disabled", false);
+                });break;
+              default :
+                swal({
+                  title: "注册成功，点击确定前往登录页",
+                  icon: "success"
+                }).then((willTrue)=>{
+                  window.location.href="auth-login.html";
+                });break;
+            }
+          },
+          error: function (data) {
+            switch (data.status) {
+              case 404:
+                swal({
+                  title: "找不到您要查找的页面",
+                  icon: "error"
+                }).then((willTrue)=>{
+                  $("#btn-submit").attr("disabled", false);
+                });
+                break;
+              default :
+                swal({
+                  title: "服务器出了点小问题",
+                  icon: "error"
+                }).then((willTrue)=>{
+                  $("#btn-submit").attr("disabled", false);
+                });
+                break;
             }
           }
         });
