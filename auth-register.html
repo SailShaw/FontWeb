@@ -139,17 +139,17 @@
             $("#btn-submit").val("正在提交...");
           },
           success: function (data) {
-            switch (data) {
-              case 'USER_IS_EXIST':
+            switch (data.code) {
+              case 10002:
                 swal({
-                  title: "账号已存在，请重新输入",
+                  title: data.massage,
                   icon: "error"
                 }).then((willTrue)=>{
                   $("#btn-submit").attr("disabled", false);
                 });break;
               default :
                 swal({
-                  title: "注册成功，点击确定前往登录页",
+                  title: data.massage,
                   icon: "success"
                 }).then((willTrue)=>{
                   window.location.href="auth-login.html";

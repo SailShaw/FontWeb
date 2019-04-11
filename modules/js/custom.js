@@ -55,7 +55,6 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                debugger;
                 if (data == 'SUCCESS') {
                     window.location.href = "auth-login.html";
                 }
@@ -69,7 +68,6 @@
      * @param result可放入需要加载数据的下拉列表的ID,如:var Json = {"roleId":roleId,"groupId":groupId}
      */
     root.dropListLoad = function (result) {
-
         //1.Json中放入需要初始化的TagID
         if (result != null) {
             $.each(result, function (key, val) {
@@ -204,14 +202,21 @@
     root.editStatus = function (val,data){
         if(val == 1){
             //将所有输入框或下拉列表添加禁用标记
-            $.each(data,function (key,val) {
+            $.each(data,function (key,val1) {
                 $("#"+key).attr("disabled", true);
             })
+            $("#placeId").attr("disabled", true);
+            $("#btn-submit").attr("disabled", true);
         }else{
             //取消禁用标记
             $.each(data,function (key,val) {
-                $("#"+key).attr("disabled", false);
+                if (key == "placeId"){
+                    $("#"+key).removeAttr("disabled");
+                }else {
+                    $("#"+key).attr("disabled", false);
+                }
             })
+            $("#btn-submit").attr("disabled", false);
         }
     }
     root.NullValueTag = function (val) {
@@ -236,5 +241,6 @@
             }
         })
     }
+
 
 }(this));
