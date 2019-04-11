@@ -115,7 +115,7 @@
   <script type="text/javascript">
     var pf = $("#password_feedback")
     $(function () {
-      $('#registerForm').submit(function () { //当提交表单时，会发生 submit 事件。
+      $('#registerForm').submit(function () {
         //Get
         var account = $("#account").val();
         var password = $("#password").val();
@@ -135,7 +135,7 @@
           url: BaseUrl + '/register',
           data: postData,
           beforeSend: function () {
-            $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+            $("#btn-submit").attr("disabled", true);
             $("#btn-submit").val("正在提交...");
           },
           success: function (data) {
