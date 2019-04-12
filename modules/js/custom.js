@@ -16,7 +16,10 @@
     // 后端请求路径
     root.BaseUrl = 'http://localhost:8888';
 
-    //全局Nav信息
+    /**
+     * 全局Nav信息加载
+     * 若通过浏览器返回按钮返回到页面,该函数执行时会根据后端传来的code跳转到登录页.
+     */
     root.navInfo = function () {
         $.ajax({
             url: BaseUrl + '/global/getLoginUserInfo',
@@ -25,26 +28,32 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data.data, function (key, val) {
-                    if (data.data != null) {
-                        switch (key) {
-                            case "znName":
-                                $("#current_znName").html(val);
-                                break;
-                            case "lastLogin":
-                                $("#current_lastLogin").html(val);
-                            default:
-                                break;
-                        }
-                    } else {
+                switch (data.code) {
+                    case 101:
                         window.location.href = "auth-login.html";
-                    }
-                });
+                        break;
+                    default:
+                        $.each(data.data, function (key, val) {
+                            switch (key) {
+                                case "znName":
+                                    $("#current_znName").html(val);
+                                    break;
+                                case "lastLogin":
+                                    $("#current_lastLogin").html(val);
+                                default:
+                                    break;
+                            }
+                        });
+                        break;
+                }
+
             }
         })
     }
 
-    //退出登录
+    /**
+     * 退出登录,后端移除Session
+     */
     root.loginOut = function () {
         $.ajax({
             url: BaseUrl + '/loginOut',
@@ -54,7 +63,7 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 swal({
-                    title: data.massage,
+                    title: data.message,
                     icon: "success"
                 }).then((willTrue) => {
                     window.location.href = "auth-login.html";
@@ -234,7 +243,7 @@
         $.each(data, function (key, val) {
             if (val == null || val == '') {
                 swal({
-                    title: key +"不能为空",
+                    title: key + "不能为空",
                     icon: "error"
                 })
             }

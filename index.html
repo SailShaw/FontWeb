@@ -57,11 +57,11 @@
                         <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="personal-center.html" class="dropdown-item has-icon">
                             <i class="fas fa-calendar"></i> 个人中心
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item has-icon">
+                        <a href="javascript:void(0);" onclick="loginOut()" class="dropdown-item has-icon">
                             <i class="fas fa-sign-out-alt"></i>退出系统
                         </a>
                     </div>
@@ -245,7 +245,7 @@
 <script src="modules/js/jquery.min.js"></script>
 <script src="modules/js/popper.js"></script>
 <script src="modules/js/tooltip.js"></script>
-<script src="modules/js/notyf.min.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/bootstrap.min.js"></script>
 <script src="modules/js/jquery.nicescroll.min.js"></script>
 <script src="modules/js/moment.min.js"></script>
@@ -271,7 +271,7 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data,function (key,val) {
+                $.each(data.data,function (key,val) {
                     switch (key) {
                         case "total":
                             $("#applicationTotal").html(val);
@@ -313,7 +313,7 @@
                             }
                             $("#twoWeekData").append(
                                 "<a href='activity-center.html' class='ticket-item ticket-more'>" +
-                                "View All<i class='fas fa-chevron-right'></i></a>");
+                                "查看全部<i class='fas fa-chevron-right'></i></a>");
                             break;
                         case "lastWeekNumCount":
                             xData = new Array();
@@ -393,8 +393,6 @@
                                 }
                             });
                             break;
-
-
                     }
                 })
             }
