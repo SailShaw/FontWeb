@@ -21,13 +21,12 @@
         $.ajax({
             url: BaseUrl + '/global/getLoginUserInfo',
             type: 'get',
-            dataType: 'json',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data, function (key, val) {
-                    if (data != null) {
+                $.each(data.data, function (key, val) {
+                    if (data.data != null) {
                         switch (key) {
                             case "znName":
                                 $("#current_znName").html(val);
@@ -37,8 +36,8 @@
                             default:
                                 break;
                         }
-                    }else {
-                        window.location.href="auth-login.html";
+                    } else {
+                        window.location.href = "auth-login.html";
                     }
                 });
             }
@@ -50,14 +49,16 @@
         $.ajax({
             url: BaseUrl + '/loginOut',
             type: 'get',
-            dataType: 'text',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                if (data == 'SUCCESS') {
+                swal({
+                    title: data.massage,
+                    icon: "success"
+                }).then((willTrue) => {
                     window.location.href = "auth-login.html";
-                }
+                })
             },
         })
     }
@@ -91,13 +92,12 @@
         $.ajax({
             url: BaseUrl + '/global/getRoleList',
             type: 'get',
-            dataType: 'json',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data) {
+                for (var i in data.data) {
                     $("#" + val).append("<option value='" + data[i].roleId + "'>" + data[i].roleName + "</option>");
                 }
             },
@@ -109,13 +109,12 @@
         $.ajax({
             url: BaseUrl + '/global/getGroupList',
             type: 'get',
-            dataType: 'json',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data) {
+                for (var i in data.data) {
                     $("#" + val).append("<option value='" + data[i].groupId + "'>" + data[i].groupName + "</option>");
                 }
             },
@@ -127,13 +126,12 @@
         $.ajax({
             url: BaseUrl + '/global/getPlaceList',
             type: 'get',
-            dataType: 'json',
             //解决session不共享
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data) {
+                for (var i in data.data) {
                     $("#" + val).append("<option value='" + data[i].placeId + "'>" + data[i].placeName + "</option>");
                 }
             },
@@ -199,43 +197,44 @@
                 return '<div class="badge badge-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">待审</font></font></div>'
         }
     }
-    root.editStatus = function (val,data){
-        if(val == 1){
+
+    //编辑状态验证
+    root.editStatus = function (val, data) {
+        if (val == 1) {
             //将所有输入框或下拉列表添加禁用标记
-            $.each(data,function (key,val1) {
-                $("#"+key).attr("disabled", true);
+            $.each(data, function (key, val1) {
+                $("#" + key).attr("disabled", true);
             })
             $("#placeId").attr("disabled", true);
             $("#btn-submit").attr("disabled", true);
-        }else{
+        } else {
             //取消禁用标记
-            $.each(data,function (key,val) {
-                if (key == "placeId"){
-                    $("#"+key).removeAttr("disabled");
-                }else {
-                    $("#"+key).attr("disabled", false);
+            $.each(data, function (key, val) {
+                if (key == "placeId") {
+                    $("#" + key).removeAttr("disabled");
+                } else {
+                    $("#" + key).attr("disabled", false);
                 }
             })
             $("#btn-submit").attr("disabled", false);
         }
     }
+
+    //空值Null值替换
     root.NullValueTag = function (val) {
         switch (val) {
             case null:
                 return '<strong><p class="text-danger">暂无</p></strong>'
-
             default :
-                return '<strong><p class="text-primary">'+val+'</p></strong>'
-
-
+                return '<strong><p class="text-primary">' + val + '</p></strong>'
         }
     }
 
     root.checkNullValue = function (data) {
-        $.each(data,function (key,val) {
-            if (val == null || val == ''){
+        $.each(data, function (key, val) {
+            if (val == null || val == '') {
                 swal({
-                    title: "不能为空",
+                    title: key +"不能为空",
                     icon: "error"
                 })
             }

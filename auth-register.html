@@ -142,14 +142,14 @@
             switch (data.code) {
               case 10002:
                 swal({
-                  title: data.massage,
+                  title: data.message,
                   icon: "error"
                 }).then((willTrue)=>{
                   $("#btn-submit").attr("disabled", false);
                 });break;
               default :
                 swal({
-                  title: data.massage,
+                  title: data.message,
                   icon: "success"
                 }).then((willTrue)=>{
                   window.location.href="auth-login.html";

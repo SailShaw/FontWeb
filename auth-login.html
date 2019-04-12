@@ -123,21 +123,21 @@
                     switch (data.code) {
                         case 10003:
                             swal({
-                                title: data.massage,
+                                title: data.message,
                                 icon: "error"
                             }).then((willTrue)=>{
                                 $("#btn-submit").attr("disabled", false);
                             });break;
                         case 10004:
                             swal({
-                                title: data.massage,
+                                title: data.message,
                                 icon: "error"
                             }).then((willTrue)=>{
                                 $("#btn-submit").attr("disabled", false);
                             });break;
                         default :
                             swal({
-                                title: data.massage,
+                                title: data.message,
                                 icon: "success"
                             }).then((willTrue)=>{
                                 window.location.href="index.html";
