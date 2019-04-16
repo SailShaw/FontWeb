@@ -178,6 +178,12 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-7">
                             <div class="card">
+                                <div class="card-header">
+                                    <h4>资源总览</h4>
+                                    <div class="card-header-action">
+                                        <button id="updatePass" class="btn btn-primary">修改密码</button>
+                                    </div>
+                                </div>
                                 <form id="editForm" method="post" class="needs-validation" novalidate=""
                                       onsubmit="return false;">
                                     <div class="card-body" style="margin-top: 6.5%;">
@@ -259,8 +265,8 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data,function (key,val) {
-                    $("#"+key).html(val)
+                $.each(data.data,function (key,val) {
+                    $("#"+key).html(val);
                     switch (key) {
                         case "znName":
                             document.getElementById("e_znName").value = val;
@@ -271,7 +277,7 @@
                         case "email":
                             document.getElementById("e_email").value = val;
                             break;
-                        default :
+                        case "groupDesc":
                             document.getElementById("e_groupDesc").value = val;
                             break;
                     }
@@ -279,7 +285,7 @@
             }
         });
 
-        $('#editForm').submit(function () { //当提交表单时，会发生 submit 事件。
+        $('#editForm').submit(function () {
             //Get
             var znName = $("#e_znName").val();
             var telphone = $("#e_telphone").val();
@@ -304,16 +310,12 @@
                 crossDomain: true,
                 xhrFields: {withCredentials: true},
                 success: function (data) {
-                    if (data == "SUCCESS") {
-                        swal({
-                            title: "提交成功",
-                            icon: "success"
-                        }).then((willTrue)=>{
-                            window.location.reload();
-                        })
-                    } else{
-                        swal("提交失败",{icon:"error"});
-                    }
+                    swal({
+                        title: data.message,
+                        icon: "success"
+                    }).then((willTrue)=>{
+                        window.location.reload();
+                    })
                 },
                 error: function (data) {
                     debugger;
@@ -337,6 +339,111 @@
             });
         });
     })
+
+
+
+
+    $("#updatePass").fireModal({
+        title: '新增资源',
+        body: '<form id="form" method="post" class="needs-validation" novalidate="" onsubmit="return false;">\n' +
+            '    <div class="row">\n' +
+            '        <!--边距-->\n' +
+            '        <div class="col-md-1"></div>\n' +
+            '        <div class="col-md-10">\n' +
+            '            <div class="form-group">\n' +
+            '                <label>旧密码</label>\n' +
+            '                <input id="oldPass" type="password" class="form-control" required>\n' +
+            '                <div class="invalid-feedback">\n' +
+            '                    请输入旧密码\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="form-group">\n' +
+            '                <label>新密码</label>\n' +
+            '                <input id="newPass" type="password" class="form-control" required>\n' +
+            '                <div class="invalid-feedback">\n' +
+            '                    请输入新密码\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="form-group">\n' +
+            '                <label>再次输入</label>\n' +
+            '                <input id="rePass" type="password" class="form-control" required>\n' +
+            '                <div class="invalid-feedback">\n' +
+            '                    请再次输入\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <!--边距-->\n' +
+            '        <div class="col-md-1"></div>\n' +
+            '    </div>\n' +
+            '</form>\n' +
+            '<button type="button" onclick="commitPass()" class="btn btn-primary" style="float: right">提交</button>',
+        center: true
+    });
+    
+    
+    function commitPass() {
+        //Get
+        var oldPassword = $("#oldPass").val();
+        var newPassword = $("#newPass").val();
+        var reNewPassword = $("#rePass").val();
+        //Json
+        var postData = {
+            "oldPassword": oldPassword,
+            "newPassword": newPassword,
+            "reNewPassword": reNewPassword
+        };
+        //Ajax
+        $.ajax({
+            type: "POST",
+            url: BaseUrl + '/user/updatePassword',
+            data: postData,
+            beforeSend: function () {
+                $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                $("#btn-submit").val("正在提交...");
+            },
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
+            success: function (data) {
+                switch (data.code) {
+                    case 10004:
+                        swal({
+                            title: data.message,
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        });break;
+                    default:
+                        swal({
+                            title: data.message,
+                            icon: "success"
+                        }).then((willTrue)=>{
+                            window.location.reload();
+                        })
+                }
+            },
+            error: function (data) {
+                debugger;
+                switch (data.status) {
+                    case 404:
+                        swal({
+                            title: "找不到您要查找的页面",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        })
+                    case 500:
+                        swal({
+                            title: "服务器出了点小问题",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        })
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

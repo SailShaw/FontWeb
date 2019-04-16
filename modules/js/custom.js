@@ -14,6 +14,7 @@
      * @type {string}
      */
     // 后端请求路径
+    // root.BaseUrl = 'http://47.101.208.131:8888';
     root.BaseUrl = 'http://localhost:8888';
 
     /**
@@ -50,6 +51,19 @@
             }
         })
     }
+
+    root.validatePermit = function(data){
+        switch (data.code) {
+            case 101:
+                window.location.href="auth-login.html";break;
+            case 403:
+                window.location.href="errors-403.html";break;
+            default:
+                break;
+        }
+    }
+
+
 
     /**
      * 退出登录,后端移除Session
