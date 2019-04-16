@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -100,7 +98,7 @@
                                 class="fab fa-centercode"></i><span>活动中心</span></a>
                     </li>
                     <li class="active">
-                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-typo3"></i><span>审核管理</span></a>
                     </li>
 
                     <li class="menu-header">System Management</li>
@@ -282,8 +280,8 @@
                 '<td data-tag="formId">' + JsonData.result[i].formId + '</td>' +
                 '<td data-tag="znName">' + JsonData.result[i].znName + '</td>' +
                 '<td data-tag="activityTitle">' + JsonData.result[i].activityTitle + '</td>' +
-                '<td data-tag="startDate">' + JsonData.result[i].startDate + '</td>' +
-                '<td data-tag="endDate">' + JsonData.result[i].endDate + '</td>' +
+                '<td data-tag="startDate">' + NullValueTag(JsonData.result[i].startDate) + '</td>' +
+                '<td data-tag="endDate">' + NullValueTag(JsonData.result[i].endDate) + '</td>' +
                 '<td data-tag="verifyStatus">' + verifyTag(JsonData.result[i].verifyStatus) + '</td>' +
                 '<td data-tag="reviewer">' + JsonData.result[i].reviewer+ '</td>' +
                 '<td data-tag="isOff">' + offTag(JsonData.result[i].isOff) + '</td>' +
@@ -325,7 +323,8 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                renderTable(data);
+                validatePermit(data);
+                renderTable(data.data);
             }
         })
     }

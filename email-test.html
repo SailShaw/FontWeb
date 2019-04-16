@@ -53,8 +53,7 @@
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span
-                                id="current_lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="personal-center.html" class="dropdown-item has-icon">
@@ -101,7 +100,7 @@
                                 class="fab fa-centercode"></i><span>活动中心</span></a>
                     </li>
                     <li class="">
-                        <a class="nav-link" href="review-center.html"><i class="fab fa-artstation"></i><span>审核管理</span></a>
+                        <a class="nav-link" href="review-center.html"><i class="fab fa-typo3"></i><span>审核管理</span></a>
                     </li>
 
                     <li class="menu-header">System Management</li>
@@ -209,8 +208,20 @@
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
+    $(function () {
+        navInfo();
+        $.ajax({
+            url: BaseUrl + '/global/emailTestPage',
+            type: 'post',
+            success: function (data) {
+                debugger;
+                validatePermit(data);
+            }
+            
+        })
 
-    $('#emailForm').submit(function () { //当提交表单时，会发生 submit 事件。
+    })
+    $('#emailForm').submit(function () {
         //Get
         var recipient = $("#recipient").val();
         var mailTitle = $("#mailTitle").val();
@@ -228,19 +239,17 @@
             url: BaseUrl + '/global/sendEmailOfTest',
             data: ajaxdata,
             beforeSend: function () {
-                if(ajaxdata.recipient == null || ajaxdata.recipient == ""){
+                if (ajaxdata.recipient == null || ajaxdata.recipient == "") {
                     swal({
                         title: "收件人不能为空",
                         icon: "error"
                     })
-                }
-                else if(ajaxdata.mailTitle == null || ajaxdata.mailTitle == ""){
+                } else if (ajaxdata.mailTitle == null || ajaxdata.mailTitle == "") {
                     swal({
                         title: "邮件标题不能为空",
                         icon: "error"
                     })
-                }
-                else if (ajaxdata.mailContent == null || ajaxdata.mailContent == "") {
+                } else if (ajaxdata.mailContent == null || ajaxdata.mailContent == "") {
                     swal({
                         title: "邮件内容不能为空",
                         icon: "error"

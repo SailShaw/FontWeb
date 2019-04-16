@@ -308,12 +308,15 @@
         $.ajax({
             url: BaseUrl + '/user/getURGInfoListByPage',
             type: 'get',
-            dataType: 'json',
             data: {
                 pageNum: pageNum || 1,
             },
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
             success: function (data) {
-                renderTable(data);
+                validatePermit(data)
+                renderTable(data.data);
             }
         })
     }
