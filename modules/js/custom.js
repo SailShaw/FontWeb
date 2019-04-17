@@ -14,8 +14,10 @@
      * @type {string}
      */
     // 后端请求路径
-    // root.BaseUrl = 'http://47.101.208.131:8888';
-    root.BaseUrl = 'http://localhost:8888';
+    //生产版本
+    root.BaseUrl = 'http://47.101.208.131:8888';
+    //开发版本
+    // root.BaseUrl = 'http://localhost:8888';
 
     /**
      * 全局Nav信息加载
@@ -120,8 +122,9 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data.data) {
-                    $("#" + val).append("<option value='" + data[i].roleId + "'>" + data[i].roleName + "</option>");
+                var result = data.data;
+                for (var i in result) {
+                    $("#" + val).append("<option value='" + result[i].roleId + "'>" + result[i].roleName + "</option>");
                 }
             },
         });
@@ -137,8 +140,9 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data.data) {
-                    $("#" + val).append("<option value='" + data[i].groupId + "'>" + data[i].groupName + "</option>");
+                var result = data.data;
+                for (var i in result) {
+                    $("#" + val).append("<option value='" + result[i].groupId + "'>" + result[i].groupName + "</option>");
                 }
             },
         });
@@ -154,8 +158,9 @@
             xhrFields: {withCredentials: true},
             success: function (data) {
                 //动态生成下拉列表框
-                for (var i in data.data) {
-                    $("#" + val).append("<option value='" + data[i].placeId + "'>" + data[i].placeName + "</option>");
+                var result = data.data;
+                for (var i in result) {
+                    $("#" + val).append("<option value='" + result[i].placeId + "'>" + result[i].placeName + "</option>");
                 }
             },
         });
@@ -240,6 +245,22 @@
                 }
             })
             $("#btn-submit").attr("disabled", false);
+        }
+    }
+
+    //审批状态验证
+    root.reviewStatus = function (data,btnID) {
+        if (data.verifyStatus == 1) {
+            swal({
+                title: "警告",
+                text: "该申请已通过审批，无法再次审批",
+                icon: "warning"
+            }).then((willTrue)=>{
+                //将所有提交添加禁用标记
+                $("#"+btnID).attr("disabled", true);
+            })
+        } else {
+            $("#"+btnID).attr("disabled", false);
         }
     }
 

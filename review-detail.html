@@ -199,23 +199,17 @@
                     <div class="col-12">
                         <div class="card author-box card-primary">
                             <div class="card-header">
-                                <h4>Write</h4>
+                                <h4>审批</h4>
                             </div>
                             <div class="card-body">
                                 <form id="verifyForm" method="post" class="needs-validation" novalidate=""
                                       onsubmit="return false;">
-                                    <!--<div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">邮件标题</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>-->
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
                                             <small>选择审核状态</small>
                                         </label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select name="verifyStatus" class="form-control selectric">
+                                            <select name="verifyStatus" class="form-control selectric" >
                                                 <option value="1">通过</option>
                                                 <option value="2">未通过</option>
                                             </select>
@@ -226,7 +220,7 @@
                                             <small>邮件内容</small>
                                         </label>
                                         <div class="col-sm-12 col-md-7">
-                                            <textarea id="mailMsg" class="summernote-simple"></textarea>
+                                            <textarea id="mailMsg" class="summernote-simple" disabled></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -265,6 +259,7 @@
 <script src="modules/js/moment.min.js"></script>
 <script src="modules/js/stisla.js"></script>
 <script src="modules/js/sweetalert.min.js"></script>
+<script src="modules/js/cleave.min.js"></script>
 <script src="modules/summernote/summernote-bs4.js"></script>
 <script src="modules/js/jquery.selectric.min.js"></script>
 <script src="modules/js/jquery.uploadPreview.min.js"></script>
@@ -283,11 +278,12 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data, function (key, val) {
+                $.each(data.data, function (key, val) {
+                    reviewStatus(data.data,"commit");
                     if (key == "verifyStatus"){
                         $("#"+key).html(verifyTag(val));
                     } else {
-                        $('#' + key).html(val);
+                        $("#" + key).html(val);
                     }
                 });
             }
@@ -295,7 +291,6 @@
 
         //
         $('#verifyForm').submit(function () { //当提交表单时，会发生 submit 事件。
-            debugger;
             //Get
             var formId = $("#formId").text();
             var userId = $("#userId").text();
@@ -321,7 +316,7 @@
                 crossDomain: true,
                 xhrFields: {withCredentials: true},
                 success: function (data) {
-                    if (data == "SUCCESS") {
+                    if (data.code = 200) {
                         swal({
                             title: "提交成功",
                             icon: "success"
@@ -329,24 +324,29 @@
                             window.location.href="review-center.html";
                         })
                     } else{
-                        swal("提交失败",{icon:"error"});
+                        swal({
+                            title: "提交成功",
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            $("#btn-submit").attr("disabled", false);
+                        })
                     }
                 },
                 error: function (data) {
-                    switch (data) {
+                    switch (data.status) {
                         case 404:
                             swal({
                                 title: "找不到您要查找的页面",
                                 icon: "error"
                             }).then((willTrue)=>{
-                                refreshDataTables(i);
+                                $("#btn-submit").attr("disabled", false);
                             })
                         case 500:
                             swal({
                                 title: "服务器出了点小问题",
                                 icon: "error"
                             }).then((willTrue)=>{
-                                refreshDataTables(i);
+                                $("#btn-submit").attr("disabled", false);
                             })
                     }
                 }

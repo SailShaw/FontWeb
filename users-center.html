@@ -127,7 +127,7 @@
                 <!-- Page Header -->
                 <div class="section-header">
                     <h1>用户管理:
-                        <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
+                        <small>可为用户分配角色或调整用户所属的学院</small>
                     </h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
@@ -325,7 +325,7 @@
         var userId = $(btn).parents('tr').find("td[data-tag='userId']").html();
         var ajaxData = {"userId":userId};
         $.ajax({
-            url: BaseUrl + '/user/getUserToFind',
+            url: BaseUrl + '/user/getUserToCache',
             data: ajaxData,
             type: 'post',
             dataType: 'text',
@@ -333,15 +333,16 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                if (data == 'SUCCESS'){
-                    window.location.href="users-detail.html";
-                }else {
-                    swal({
-                        title: "数据获取异常",
-                        icon: "error"
-                    }).then((willTrue)=>{
-                        refreshDataTables(i);
-                    })
+                switch (data.code) {
+                    case 20001:
+                        swal({
+                            title: data.message,
+                            icon: "success"
+                        }).then(()=>{
+                            window.location.reload();
+                        });break;
+                    default:
+                        window.location.href="users-detail.html";
                 }
             },
             error: function (data) {
@@ -383,21 +384,21 @@
                     type: 'post',
                     dataType: 'text',
                     success: function (data) {
-                        if (data == 'SUCCESS'){
-                            swal({
-                                title: "操作成功",
-                                icon: "success"
-                            }).then((willTrue)=>{
-                                refreshDataTables(i);
-                            })
-
-                        }else {
-                            swal({
-                                title: "操作失败",
-                                icon: "error"
-                            }).then((willTrue)=>{
-                                refreshDataTables(i);
-                            })
+                        switch (data.code) {
+                            case 20001:
+                                swal({
+                                    title: data.message,
+                                    icon: "success"
+                                }).then(()=>{
+                                    window.location.reload();
+                                });break;
+                            default:
+                                swal({
+                                    title: data.message,
+                                    icon: "success"
+                                }).then(()=>{
+                                    window.location.reload();
+                                });break;
                         }
                     },
                     error: function (data) {

@@ -8,7 +8,6 @@
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
-    <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
     <!-- Start GA -->
@@ -125,8 +124,8 @@
             <section class="section">
                 <!-- Page Header -->
                 <div class="section-header">
-                    <h1>活动中心:
-                        <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
+                    <h1>活动中心
+                        <small></small>
                     </h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
@@ -137,7 +136,14 @@
                 <div class="section-body">
                     <div class="row">
                         <div class="col-12">
+
                             <div class="card">
+                                <div class="card-header">
+                                    <h4>个人申请记录总览</h4>
+                                    <div class="card-header-action">
+                                        <button onclick="createForm()" class="btn btn-primary">新增</button>
+                                    </div>
+                                </div>
                                 <!--body-->
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
@@ -241,7 +247,6 @@
 <script src="modules/js/moment.min.js"></script>
 <script src="modules/js/bootstrapValidator.js"></script>
 <script src="modules/js/stisla.js"></script>
-<script src="modules/js/notyf.min.js"></script>
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
@@ -283,8 +288,8 @@
             tr =
                 '<td data-tag="formId">' + JsonData.result[i].formId + '</td>' +
                 '<td data-tag="activityTitle">' + JsonData.result[i].activityTitle + '</td>' +
-                '<td data-tag="startDate">' + JsonData.result[i].startDate + '</td>' +
-                '<td data-tag="endDate">' + JsonData.result[i].endDate + '</td>' +
+                '<td data-tag="startDate">' + NullValueTag(JsonData.result[i].startDate) + '</td>' +
+                '<td data-tag="endDate">' + NullValueTag(JsonData.result[i].endDate) + '</td>' +
                 '<td data-tag="verifyStatus">' + verifyTag(JsonData.result[i].verifyStatus) + '</td>' +
                 '<td data-tag="isOff">' + offTag(JsonData.result[i].isOff) + '</td>' +
                 '<td data-tag="isEff">' + isEffTag(JsonData.result[i].isEff) + '</td>' +
@@ -336,7 +341,7 @@
         var formId = $(btn).parents('tr').find("td[data-tag='formId']").html();
         var ajaxData = {"formId":formId};
         $.ajax({
-            url: BaseUrl + '/user/getDetailToCache',
+            url: BaseUrl + '/application/getDetailToCache',
             data: ajaxData,
             type: 'post',
             dataType: 'text',
@@ -344,15 +349,16 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                if (data == 'SUCCESS'){
-                    window.location.href="activity-detail.html";
-                }else {
-                    swal({
-                        title: "数据获取异常",
-                        icon: "error"
-                    }).then((willTrue)=>{
-                        refreshDataTables(i);
-                    })
+                switch (data.code) {
+                    case 20001:
+                        swal({
+                            title: data.message,
+                            icon: "error"
+                        }).then((willTrue)=>{
+                            refreshDataTables();
+                        });break;
+                    default:
+                        window.location.href="activity-edit.html";
                 }
             },
             error: function (data) {
@@ -362,14 +368,14 @@
                             title: "找不到您要查找的页面",
                             icon: "error"
                         }).then((willTrue)=>{
-                            refreshDataTables(i);
+                            window.location.reload();
                         })
                     case 500:
                         swal({
                             title: "服务器出了点小问题",
                             icon: "error"
                         }).then((willTrue)=>{
-                            refreshDataTables(i);
+                            window.location.reload();
                         })
                 }
             }
@@ -382,7 +388,7 @@
         var activityTitle = $(btn).parents('tr').find("td[data-tag='activityTitle']").html();
         var ajaxData = {"formId":formId};
         swal({
-            title: '确定删除用户"'+activityTitle+'"吗?',
+            title: '确定删除"'+activityTitle+'"吗?',
             icon: 'warning',
             buttons: true,
             dangerMode: true,
@@ -393,22 +399,25 @@
                     data: ajaxData,
                     type: 'post',
                     dataType: 'text',
+                    //解决session不共享
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
                     success: function (data) {
-                        if (data == 'SUCCESS'){
-                            swal({
-                                title: "操作成功",
-                                icon: "success"
-                            }).then((willTrue)=>{
-                                refreshDataTables(i);
-                            })
-
-                        }else {
-                            swal({
-                                title: "操作失败",
-                                icon: "error"
-                            }).then((willTrue)=>{
-                                refreshDataTables(i);
-                            })
+                        switch (data.code) {
+                            case 20001:
+                                swal({
+                                    title: data.message,
+                                    icon: "error"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                });break;
+                            default:
+                                swal({
+                                    title: "操作成功",
+                                    icon: "success"
+                                }).then((willTrue)=>{
+                                    refreshDataTables(i);
+                                });break;
                         }
                     },
                     error: function (data) {
@@ -432,6 +441,10 @@
                 })
             }
         })
+    }
+
+    function createForm() {
+        window.location.href="activity-create.html";
     }
 </script>
 </body>

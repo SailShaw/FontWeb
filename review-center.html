@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>审批中心 &mdash; 校园活动管理系统</title>
+    <title>校园活动管理系统</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
-    <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
     <!-- Start GA -->
@@ -125,8 +124,8 @@
             <section class="section">
                 <!-- Page Header -->
                 <div class="section-header">
-                    <h1>审核中心:
-                        <small>展示的数据:活动申请人、活动管理员、新注册用户(未分配角色和部门),此处的删除操作为逻辑删除。</small>
+                    <h1>审核中心
+                        <small></small>
                     </h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
@@ -286,8 +285,8 @@
                 '<td data-tag="reviewer">' + JsonData.result[i].reviewer+ '</td>' +
                 '<td data-tag="isOff">' + offTag(JsonData.result[i].isOff) + '</td>' +
                 '<td>' +
-                '<button type="button" onclick="verifyForm(this)" class="btn btn-primary btn-icon" data-toggle="modal" data-target="#editModal"><i class="far fa-edit"></i></button>' +
-                '<button type="button" onclick="delForm(this)" class="btn btn-danger btn-icon" data-toggle="modal" data-target="#delModal"><i class="fas fa-times"></i></button>' +
+                '<button type="button" onclick="verifyForm(this)" class="btn btn-primary btn-icon" ><i class="far fa-edit"></i></button>' +
+                '<button type="button" onclick="closeForm(this)" class="btn btn-danger btn-icon" ><i class="fas fa-times"></i></button>' +
                 '</td>'
             $("#dataTable").append('<tr>' + tr + '</tr>')
         }
@@ -341,16 +340,16 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                if (data == 'SUCCESS'){
+                if (data.code = 200){
                     window.location.href="review-detail.html";
-                }else if(data == 'JSON_IS_NULL'){
-                    swal("Sorry","数据获取异常","warning")
+                }else {
+                    swal("Sorry",data.message,"error");
                 }
             },
             error: function (data) {
                 switch (data.status) {
                     case 404:
-                        swal("Oops","服务器出了点小问题","error");
+                        swal("Oops","找不到您想要的页面","error");
                     case 500:
                         swal("Oops","服务器出了点小问题","error");
                 }
@@ -359,27 +358,43 @@
     }
 
     //删除
-    function delForm(btn) {
+    function closeForm(btn) {
         debugger;
         var formId = $(btn).parents('tr').find("td[data-tag='formId']").html();
         var activityTitle = $(btn).parents('tr').find("td[data-tag='activityTitle']").html();
         var ajaxData = {"formId":formId};
         swal({
-            title: '确定删除"'+activityTitle+'"吗?',
+            title: '确定关闭"'+activityTitle+'"吗?',
             icon: 'warning',
             buttons: true,
             dangerMode: true,
         }).then((willDelete)=>{
             if (willDelete){
                 $.ajax({
-                    url: BaseUrl + '/application/deleteFormById',
+                    url: BaseUrl + '/application/closeFormById',
                     data: ajaxData,
                     type: 'post',
-                    dataType: 'text',
+                    //解决session不共享
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
                     success: function (data) {
-                        if (data == 'SUCCESS'){
-                            swal("该用户已被删除",{icon:"success"});
-                            refreshDataTables(i);
+                        if (data.code = 200){
+                            swal({
+                                title: data.message,
+                                icon: "success",
+                            }).then((willTrue)=>{
+                                window.location.reload();
+                            })
+                        }else {
+                            swal("Sorry",data.message,"error");
+                        }
+                    },
+                    error: function (data) {
+                        switch (data.status) {
+                            case 404:
+                                swal("Oops","找不到您想要的页面","error");
+                            case 500:
+                                swal("Oops","服务器出了点小问题","error");
                         }
                     }
                 })

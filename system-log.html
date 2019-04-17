@@ -8,7 +8,6 @@
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
     <link rel="stylesheet" href="modules/css/all.min.css">
-    <link rel="stylesheet" href="modules/css/notyf.min.css">
     <link rel="stylesheet" href="modules/css/style.css">
     <link rel="stylesheet" href="modules/css/components.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -226,6 +225,7 @@
 <script src="modules/js/popper.js"></script>
 <script src="modules/js/tooltip.js"></script>
 <script src="modules/js/bootstrap.min.js"></script>
+<script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/jquery.nicescroll.min.js"></script>
 <script src="modules/js/moment.min.js"></script>
 <script src="modules/js/bootstrapValidator.js"></script>
@@ -233,7 +233,6 @@
 <!-- JS Libraies -->
 <script src="modules/js/sweetalert.min.js"></script>
 <!-- Page Specific JS File -->
-<script src="modules/js/notyf.min.js"></script>
 <!-- Template JS File -->
 <script src="modules/js/scripts.js"></script>
 <script src="modules/js/custom.js"></script>
@@ -309,8 +308,12 @@
             data: {
                 pageNum: pageNum || 1,
             },
+            //解决session不共享
+            crossDomain: true,
+            xhrFields: {withCredentials: true},
             success: function (data) {
-                renderTable(data);
+                validatePermit(data);
+                renderTable(data.data);
             }
         })
     }

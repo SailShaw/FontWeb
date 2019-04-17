@@ -149,7 +149,7 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form id="editForm" method="post" class="needs-validation" novalidate=""
+                                    <form id="createForm" method="post" class="needs-validation" novalidate=""
                                           onsubmit="return false;">
                                     <div class="row">
                                         <div class="col-2"></div>
@@ -242,6 +242,7 @@
 <script src="modules/js/sweetalert.min.js"></script>
 <script src="modules/js/daterangepicker.js"></script>
 <script src="modules/js/select2.full.min.js"></script>
+<script src="modules/js/cleave.min.js"></script>
 
 <!-- Page Specific JS File -->
 <script src="modules/js/forms-advanced-forms.js"></script>
@@ -252,24 +253,10 @@
     $(function () {
         //nav加载
         navInfo();
-        $.ajax({
-            url: BaseUrl + 'application/getDetailOnCache',
-            type: 'get',
-            dataType: 'json',
-            //解决session不共享
-            crossDomain: true,
-            xhrFields: {withCredentials: true},
-            success: function (data) {
-                //关闭状态校验
-                editStatus(data.isOff,data);
-                $.each(data, function (key, val) {
-                    $('#' + key).html(val);
-                });
-            }
-        });
-
+        var dropList = {"placeId":"placeId"};
+        dropListLoad(dropList);
         //表单提交
-        $('#editForm').submit(function () { //当提交表单时，会发生 submit 事件。
+        $('#createForm').submit(function () { //当提交表单时，会发生 submit 事件。
             //Get
             var activityTitle = $("#activityTitle").val();
             var attendance = $("#attendance").val();
@@ -288,9 +275,10 @@
                 "activityContent": activityContent
             };
             //Ajax
+            debugger;
             $.ajax({
                 type: "POST",
-                url: BaseUrl + 'application/modifyFormById',
+                url: BaseUrl + '/application/createAppForm',
                 data: postData,
                 beforeSend: function () {
                     $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
@@ -299,20 +287,25 @@
                 crossDomain: true,
                 xhrFields: {withCredentials: true},
                 success: function (data) {
-                    if (data == 'SUCCESS'){
-                        window.location.reload();
-                    }else {
-                        swal({
-                            title: "数据获取异常",
-                            icon: "error"
-                        }).then((willTrue)=>{
-                            //取消设置禁用按钮
-                            $("#btn-submit").attr("disabled", false);
-                        })
+                    switch (data.code) {
+                        case 20001:
+                            swal({
+                                title: data.message,
+                                icon: "error"
+                            }).then(()=>{
+                                $("#btn-submit").attr("disabled", false);
+                            });break;
+                        default:
+                            swal({
+                                title: data.message,
+                                icon: "success"
+                            }).then(()=>{
+                                window.location.href="activity-center.html";
+                            });break;
                     }
                 },
                 error: function (data) {
-                    switch (data) {
+                    switch (data.status) {
                         case 404:
                             swal({
                                 title: "找不到您要查找的页面",

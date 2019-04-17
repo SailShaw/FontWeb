@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Forms &rsaquo; Editor &mdash; Stisla</title>
+    <title>校园活动管理系统</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="modules/css/bootstrap.min.css">
@@ -129,7 +129,10 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Editor</h1>
+                    <div class="section-header-back">
+                        <a href="users-center.html" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                    </div>
+                    <h1>编辑</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="index.html">首页</a></div>
                         <div class="breadcrumb-item active"><a href="users-center.html">用户管理</a></div>
@@ -137,9 +140,9 @@
                     </div>
                 </div>
                 <div class="section-body">
-                    <h2 class="section-title">Hi, Ujang!</h2>
+                    <h2 class="section-title">Hi!</h2>
                     <p class="section-lead">
-                        Change information about yourself on this page.
+                        你可以在这里为其他用户分配权限或者修改所属学院.
                     </p>
 
                     <div class="row mt-sm-4">
@@ -170,6 +173,9 @@
                                     </div>
                                 </div>
                                 <div class="profile-widget-description">
+                                    <div style="display: none" class="profile-widget-name section-title">姓名:
+                                        <span id="userId"></span>
+                                    </div>
                                     <div class="profile-widget-name section-title">姓名:
                                         <span id="znName"></span>
                                     </div>
@@ -187,12 +193,12 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-7">
                             <div class="card">
-                                <form method="post" class="needs-validation" novalidate="">
                                     <div class="card-header">
                                         <h4>设置角色和所属部门</h4>
                                     </div>
+                                <form id="editForm" method="post" class="needs-validation" novalidate=""
+                                      onsubmit="return false;">
                                     <div class="card-body">
-                                        <form id="editForm">
                                             <div class="section-title">选择角色</div>
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
@@ -210,15 +216,16 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </form>
+
                                     </div>
-                                    <div class="card-footer text-right">
-                                        <button class="btn btn-primary">提交</button>
-                                    </div>
+                                <div class="card-footer text-right">
+                                    <button id="btn-submit" type="submit" class="btn btn-primary">提交</button>
+                                </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
         </div>
@@ -254,9 +261,9 @@
 <script src="modules/js/custom.js"></script>
 <script type="text/javascript">
     $(function () {
+        navInfo();
         roleList("roleId");
         groupList("groupId");
-
         $.ajax({
             url: BaseUrl + '/user/getUserOnCache',
             type: 'get',
@@ -265,7 +272,8 @@
             crossDomain: true,
             xhrFields: {withCredentials: true},
             success: function (data) {
-                $.each(data, function (key, val) {
+                $.each(data.data, function (key, val) {
+                    debugger;
                     switch (key) {
                         case "roleId":
                             document.getElementById(key).value = val;
@@ -280,6 +288,68 @@
                 });
             }
         })
+
+        $('#editForm').submit(function () {
+            //Get
+            var userId = $("#userId").text();
+            var roleId = $("#roleId").val();
+            var groupId = $("#groupId").val();
+            //Json
+            var postData = {
+                "userId": userId,
+                "roleId": roleId,
+                "groupId": groupId
+            };
+            //Ajax
+            $.ajax({
+                type: "POST",
+                url: BaseUrl + '/user/modifyURGInfo',
+                data: postData,
+                beforeSend: function () {
+                    $("#btn-submit").attr("disabled", true);//提交表单前的处理，防止用户多次点击【登陆】，重复提交表单
+                    $("#btn-submit").val("正在提交...");
+                },
+                crossDomain: true,
+                xhrFields: {withCredentials: true},
+                success: function (data) {
+                    switch (data.code) {
+                        case 20001:
+                            swal({
+                                title: data.message,
+                                icon: "error"
+                            }).then(()=>{
+                                $("#btn-submit").attr("disabled", false);
+                            });break;
+                        default:
+                            swal({
+                                title: data.message,
+                                icon: "success"
+                            }).then(()=>{
+                                window.location.href="users-center.html";
+                            });break;
+                    }
+
+                },
+                error: function (data) {
+                    switch (data.status) {
+                        case 404:
+                            swal({
+                                title: "找不到您要查找的页面",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                $("#btn-submit").attr("disabled", false);
+                            })
+                        case 500:
+                            swal({
+                                title: "服务器出了点小问题",
+                                icon: "error"
+                            }).then((willTrue)=>{
+                                $("#btn-submit").attr("disabled", false);
+                            })
+                    }
+                }
+            });
+        });
     })
 </script>
 </body>
