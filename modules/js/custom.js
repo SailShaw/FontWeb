@@ -15,9 +15,9 @@
      */
     // 后端请求路径
     //生产版本
-    root.BaseUrl = 'http://47.101.208.131:8888';
+    //root.BaseUrl = 'http://47.101.208.131:8888';
     //开发版本
-    // root.BaseUrl = 'http://localhost:8888';
+     root.BaseUrl = 'http://localhost:8888';
 
     /**
      * 全局Nav信息加载
