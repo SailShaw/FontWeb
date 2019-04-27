@@ -57,7 +57,8 @@
                     <!-- 弹框 -->
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--上次登录时间-->
-                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span id="current_lastLogin"></span></strong>
+                        <div style="text-align: center" class="dropdown-title"><strong>上次登录:<span
+                                id="current_lastLogin"></span></strong>
                         </div>
                         <div class="dropdown-divider"></div>
                         <a href="personal-center.html" class="dropdown-item has-icon">
@@ -193,54 +194,55 @@
                         </div>
                         <div class="col-12 col-md-12 col-lg-7">
                             <div class="card">
-                                    <div class="card-header">
-                                        <h4>设置角色和所属部门</h4>
-                                    </div>
+                                <div class="card-header">
+                                    <h4>设置角色和所属部门</h4>
+                                </div>
                                 <form id="editForm" method="post" class="needs-validation" novalidate=""
                                       onsubmit="return false;">
                                     <div class="card-body">
-                                            <div class="section-title">选择角色</div>
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <select class="custom-select" id="roleId" name="roleId">
-                                                        <option value="0" selected>请选择</option>
-                                                    </select>
-                                                </div>
+                                        <div class="section-title">选择角色</div>
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <select class="custom-select" id="roleId" name="roleId">
+                                                    <option value="0" selected>请选择</option>
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div class="section-title">选择部门</div>
-                                            <div class="form-group">
-                                                <div class="selectric-group">
-                                                    <select class="custom-select" id="groupId" name="groupId">
-                                                        <option value="0">请选择</option>
-                                                    </select>
-                                                </div>
+                                        <div class="section-title">选择部门</div>
+                                        <div class="form-group">
+                                            <div class="selectric-group">
+                                                <select class="custom-select" id="groupId" name="groupId">
+                                                    <option value="0">请选择</option>
+                                                </select>
                                             </div>
+                                        </div>
 
                                     </div>
-                                <div class="card-footer text-right">
-                                    <button id="btn-submit" type="submit" class="btn btn-primary">提交</button>
-                                </div>
+                                    <div class="card-footer text-right">
+                                        <button id="btn-submit" type="submit" class="btn btn-primary">提交</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
             </section>
         </div>
         </section>
     </div>
-    <footer class="main-footer">
-        <div class="footer-left">
-            Copyright &copy; 2018
-            <div class="bullet"></div>
-            Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
-        </div>
-        <div class="footer-right">
+    </section>
+</div>
+<footer class="main-footer">
+    <div class="footer-left">
+        Copyright &copy; 2018
+        <div class="bullet"></div>
+        Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+    </div>
+    <div class="footer-right">
 
-        </div>
-    </footer>
+    </div>
+</footer>
 </div>
 </div>
 
@@ -317,16 +319,18 @@
                             swal({
                                 title: data.message,
                                 icon: "error"
-                            }).then(()=>{
+                            }).then(() => {
                                 $("#btn-submit").attr("disabled", false);
-                            });break;
+                            });
+                            break;
                         default:
                             swal({
                                 title: data.message,
                                 icon: "success"
-                            }).then(()=>{
-                                window.location.href="users-center.html";
-                            });break;
+                            }).then(() => {
+                                window.location.href = "users-center.html";
+                            });
+                            break;
                     }
 
                 },
@@ -336,14 +340,14 @@
                             swal({
                                 title: "找不到您要查找的页面",
                                 icon: "error"
-                            }).then((willTrue)=>{
+                            }).then((willTrue) => {
                                 $("#btn-submit").attr("disabled", false);
                             })
                         case 500:
                             swal({
                                 title: "服务器出了点小问题",
                                 icon: "error"
-                            }).then((willTrue)=>{
+                            }).then((willTrue) => {
                                 $("#btn-submit").attr("disabled", false);
                             })
                     }
